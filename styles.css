@@ -1,0 +1,263 @@
+/* ==============================================================================
+   Módulo 1: Layout Raíz y Fondo de Escritorio - Iván Arévalo OS
+   ============================================================================== */
+
+:root {
+  --bg-dark: #0b0f19;
+  --surface: rgba(18, 24, 38, 0.92);
+  --surface-header: rgba(28, 36, 54, 0.96);
+  --surface-hover: rgba(45, 55, 78, 0.8);
+  --border: rgba(99, 115, 148, 0.35);
+  --border-active: rgba(56, 189, 248, 0.7);
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-rust: #f97316;
+  --accent-green: #10b981;
+  --accent-amber: #f59e0b;
+  --shadow-window: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
+  --taskbar-height: 44px;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Fira Code", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  color: var(--text);
+  background-color: var(--bg-dark);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ------------------------------------------------------------------------------
+   Escritorio y Fondo con pc.jpeg
+   ------------------------------------------------------------------------------ */
+#desktop {
+  position: relative;
+  width: 100vw;
+  height: calc(100vh - var(--taskbar-height));
+  background-image: 
+    radial-gradient(ellipse at center, rgba(15, 23, 42, 0.55) 0%, rgba(7, 11, 21, 0.88) 100%),
+    url('wallpapers/pc.jpeg');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Efecto sutil de scanlines / textura retro hacker */
+#desktop::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ------------------------------------------------------------------------------
+   Grid de Iconos de Escritorio
+   ------------------------------------------------------------------------------ */
+#desktop-icons {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 16px 20px;
+  z-index: 5;
+  pointer-events: auto;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 86px;
+  padding: 8px 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.desktop-icon:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.desktop-icon.selected {
+  background-color: rgba(56, 189, 248, 0.25);
+  border-color: var(--accent);
+}
+
+.desktop-icon .icon-img {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.6));
+}
+
+.desktop-icon .icon-img svg {
+  width: 100%;
+  height: 100%;
+}
+
+.desktop-icon .icon-label {
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 5px rgba(0, 0, 0, 0.8);
+  word-break: break-word;
+  max-width: 82px;
+}
+
+.desktop-icon .badge {
+  font-size: 9px;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  margin-top: 2px;
+  display: inline-block;
+}
+
+.badge-pdf {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.badge-rust {
+  background-color: var(--accent-rust);
+  color: #fff;
+}
+
+.badge-sys {
+  background-color: #3b82f6;
+  color: #fff;
+}
+
+.badge-hw {
+  background-color: #eab308;
+  color: #000;
+  font-weight: bold;
+}
+
+/* ------------------------------------------------------------------------------
+   Insignia flotante de bienvenida / Taller de Iván
+   ------------------------------------------------------------------------------ */
+.workshop-banner {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.workshop-banner .banner-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+.workshop-banner .banner-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.workshop-banner .title {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.workshop-banner .subtitle {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+/* ------------------------------------------------------------------------------
+   Contenedor de Ventanas
+   ------------------------------------------------------------------------------ */
+#windows-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+#windows-container .window {
+  pointer-events: auto;
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 768px) {
+  #desktop-icons {
+    top: 10px;
+    left: 10px;
+    gap: 10px;
+  }
+  .desktop-icon {
+    width: 74px;
+    padding: 6px 2px;
+  }
+  .desktop-icon .icon-img {
+    width: 36px;
+    height: 36px;
+  }
+  .desktop-icon .icon-label {
+    font-size: 10.5px;
+  }
+  .workshop-banner {
+    display: none;
+  }
+}

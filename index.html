@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iván Arévalo | Hardware, SysAdmin & Backend Rust OS</title>
+  <meta name="description" content="Entorno de escritorio interactivo y portafolio de Iván Arévalo. Técnico en Sistemas, Administrador de Sistemas y Desarrollador Backend en Rust.">
+
+  <!-- Estilos del Sistema -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="windows.css">
+  <link rel="stylesheet" href="taskbar.css">
+</head>
+<body>
+
+  <!-- ==============================================================================
+       MÓDULO 1: Layout Raíz y Fondo de Escritorio
+       ============================================================================== -->
+  <main id="desktop">
+
+    <!-- Insignia superior derecha: Estación de Taller -->
+    <div class="workshop-banner">
+      <span class="banner-dot"></span>
+      <div class="banner-text">
+        <span class="title">TALLER & ESTACIÓN DE TRABAJO</span>
+        <span class="subtitle">i486 DX2 / Linux / Rust Engine</span>
+      </div>
+    </div>
+
+    <!-- Grid de Iconos del Escritorio -->
+    <div id="desktop-icons">
+
+      <!-- 1. CV Técnico en Sistemas (PDF) -->
+      <div class="desktop-icon" data-action="open-pdf" data-pdf="cvs/tecnicio%20en%20sistemas.pdf" data-pdf-title="CV - Técnico en Sistemas (Iván Arévalo).pdf" title="Abrir CV Técnico en PDF">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.1 4.89 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#ef4444"/>
+            <path d="M14 2V8H20L14 2Z" fill="#b91c1c"/>
+            <path d="M9 13H15M9 17H13" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">CV_Tecnico.pdf</span>
+        <span class="badge badge-pdf">PDF</span>
+      </div>
+
+      <!-- 2. CV Sys Admin (PDF) -->
+      <div class="desktop-icon" data-action="open-pdf" data-pdf="cvs/sys-admin.pdf" data-pdf-title="CV - Sys Admin (Iván Arévalo).pdf" title="Abrir CV SysAdmin en PDF">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.1 4.89 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#3b82f6"/>
+            <path d="M14 2V8H20L14 2Z" fill="#1d4ed8"/>
+            <path d="M9 13H15M9 17H13" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">CV_SysAdmin.pdf</span>
+        <span class="badge badge-sys">PDF</span>
+      </div>
+
+      <!-- 3. CV Backend Rust (PDF) -->
+      <div class="desktop-icon" data-action="open-pdf" data-pdf="cvs/dev.pdf" data-pdf-title="CV - Backend Developer Rust (Iván Arévalo).pdf" title="Abrir CV Backend Rust en PDF">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.1 4.89 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#f97316"/>
+            <path d="M14 2V8H20L14 2Z" fill="#c2410c"/>
+            <path d="M9 13H15M9 17H13" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">CV_Rust_Dev.pdf</span>
+        <span class="badge badge-rust">PDF</span>
+      </div>
+
+      <!-- 4. CV Hub Interactivo -->
+      <div class="desktop-icon" data-action="open-window" data-window="win-cv" title="Explorar los perfiles de CV interactivos">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="4" width="18" height="16" rx="2" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="8" cy="9" r="2" fill="#ffffff"/>
+            <path d="M6 15C6 13.5 7.5 13 8 13C8.5 13 10 13.5 10 15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M13 8H18M13 12H18M13 16H16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">CV Interactivo</span>
+      </div>
+
+      <!-- 5. Visor de Proyectos Web -->
+      <div class="desktop-icon" data-action="open-window" data-window="win-projects" title="Abrir Visor de Proyectos Web">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="3" width="20" height="15" rx="2" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+            <path d="M2 7H22" stroke="#38bdf8" stroke-width="1.5"/>
+            <circle cx="5" cy="5" r="0.8" fill="#ef4444"/>
+            <circle cx="8" cy="5" r="0.8" fill="#f59e0b"/>
+            <circle cx="11" cy="5" r="0.8" fill="#10b981"/>
+            <path d="M8 21H16M12 18V21" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">Proyectos</span>
+      </div>
+
+      <!-- 6. Directorio sys-files/ -->
+      <div class="desktop-icon" data-action="open-window" data-window="win-sysfiles" title="Abrir carpeta de configuración sys-files">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M3 7V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7H11L9 5H5C3.9 5 3 5.9 3 7Z" fill="#3b82f6" stroke="#60a5fa" stroke-width="1.2"/>
+            <path d="M7 13L10 16L7 19" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M12 19H16" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">sys-files/</span>
+        <span class="badge badge-sys">SYS</span>
+      </div>
+
+      <!-- 7. Bloc de Notas del Taller -->
+      <div class="desktop-icon" data-action="open-window" data-window="win-notepad" title="Abrir Bloc de Notas">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="4" y="3" width="16" height="18" rx="2" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+            <path d="M7 7H17M7 11H17M7 15H13" stroke="#854d0e" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">Bloc Notas</span>
+      </div>
+
+      <!-- 8. Perfil Personal "Yo" -->
+      <div class="desktop-icon" data-action="open-cv-tab" data-cv-tab="yo" title="Conocer al autor">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" fill="#6366f1" stroke="#a5b4fc" stroke-width="1.5"/>
+            <circle cx="12" cy="9" r="3.5" fill="#ffffff"/>
+            <path d="M6.5 18.5C7.5 15.5 9.5 14.5 12 14.5C14.5 14.5 16.5 15.5 17.5 18.5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="icon-label">Perfil "Yo"</span>
+      </div>
+
+    </div>
+
+    <!-- ==============================================================================
+         MÓDULO 2 & 3: Sistema de Ventanas Flotantes y Contenido
+         ============================================================================== -->
+    <div id="windows-container">
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 1: CV HUB INTERACTIVO
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-cv" data-title="Currículum Vitae - Iván Arévalo" style="top: 40px; left: 140px; width: 880px; height: 600px;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="4" width="18" height="16" rx="2" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+                <circle cx="8" cy="9" r="2" fill="#ffffff"/>
+                <path d="M6 15C6 13.5 7.5 13 8 13C8.5 13 10 13.5 10 15" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </span>
+            <span>Currículum Vitae - Iván Arévalo</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="cv-app">
+            
+            <!-- Encabezado del Postulante -->
+            <div class="cv-topbar">
+              <div class="cv-candidate-info">
+                <div class="candidate-avatar">🛠️</div>
+                <div class="candidate-meta">
+                  <h2>Iván Arévalo</h2>
+                  <p>
+                    <span>📞 3319051303</span>
+                    <span>✉️ <a href="mailto:solodigophi@gmail.com">solodigophi@gmail.com</a></span>
+                    <span>🐙 <a href="https://github.com/IvanMatias1618" target="_blank" rel="noopener">@IvanMatias1618</a></span>
+                  </p>
+                </div>
+              </div>
+              <div class="cv-actions">
+                <button class="btn-cv-action" id="btn-print-cv">🖨️ Imprimir Perfil</button>
+              </div>
+            </div>
+
+            <!-- Pestañas de Perfiles -->
+            <nav class="cv-tabs-bar">
+              <button class="cv-tab-btn active hw" data-tab="tecnico">⚙️ Técnico en Sistemas</button>
+              <button class="cv-tab-btn sys" data-tab="sysadmin">🐧 Sys Admin</button>
+              <button class="cv-tab-btn rust" data-tab="rust">🦀 Backend Developer (Rust)</button>
+              <button class="cv-tab-btn" data-tab="yo">💡 Yo</button>
+            </nav>
+
+            <!-- Contenido de las Pestañas -->
+            <div class="cv-content-area">
+
+              <!-- PERFIL 1: TÉCNICO EN SISTEMAS -->
+              <article class="cv-profile-panel active" id="panel-tecnico">
+                <div class="profile-hero">
+                  <h3>⚙️ Técnico en Sistemas & Circuitos de Control Industrial</h3>
+                  <p>
+                    Especialista en mantenimiento preventivo y correctivo, diagnóstico de circuitos eléctricos con lógica de control industrial, fuentes de poder, y soporte crítico a equipos de cómputo y terminales especializadas en tiempo real. Alta adaptabilidad y resolución práctica bajo presión.
+                  </p>
+                  <div style="margin-top: 14px;">
+                    <button class="btn-cv-action primary" id="btn-view-pdf-tecnico">
+                      📄 Ver PDF Oficial (tecnicio en sistemas.pdf)
+                    </button>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Experiencia Laboral</h4>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Soporte Técnico Especializado</div>
+                    <div class="timeline-company">Play City Casino</div>
+                    <div class="timeline-date">Agosto 2025 — Febrero 2026</div>
+                    <p class="timeline-desc">
+                      Asistencia técnica inmediata y resolución de fallas en tiempo real para terminales de punto de venta y gabinetes electrónicos de operaciones (E-Box, plataformas de juego Zitro, IGT, AGS, Ortiz, EGT). Calibración de pantallas táctiles, diagnóstico de conectividad (SAS, red central), fuentes de alimentación conmutadas y clonación de discos.
+                    </p>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-role">Operador de Máquina & Mantenimiento Industrial</div>
+                    <div class="timeline-company">Maquila de Ojal y Botón</div>
+                    <div class="timeline-date">2014 — Julio 2025</div>
+                    <p class="timeline-desc">
+                      Mantenimiento correctivo y preventivo a maquinaria electromecánica. Automatización y optimización de flujos de trabajo en equipos digitales, diagnóstico de sensores y resolución de contingencias operativas.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Habilidades Técnicas</h4>
+                  <div class="skill-tags">
+                    <span class="skill-tag highlight">Electricista & Control Industrial</span>
+                    <span class="skill-tag highlight">Diagnóstico de Fuentes ATX / DC</span>
+                    <span class="skill-tag highlight">Soldadura con Cautín & SMD</span>
+                    <span class="skill-tag">Cableado Estructurado</span>
+                    <span class="skill-tag">Sistemas E-Box & Periféricos</span>
+                    <span class="skill-tag">Calibración de Pantallas Táctiles</span>
+                    <span class="skill-tag">Clonación de Discos</span>
+                    <span class="skill-tag">Windows / Linux Desktop</span>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Educación</h4>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Electricista Industrial</div>
+                    <div class="timeline-company">CECATI</div>
+                    <div class="timeline-date">2026</div>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Químico en Alimentos (Trunca)</div>
+                    <div class="timeline-company">Politécnico de Guadalajara</div>
+                    <div class="timeline-date">2016 — 2019</div>
+                  </div>
+                </div>
+              </article>
+
+              <!-- PERFIL 2: SYS ADMIN -->
+              <article class="cv-profile-panel" id="panel-sysadmin">
+                <div class="profile-hero">
+                  <h3>🐧 Administrador de Sistemas (SysAdmin)</h3>
+                  <p>
+                    Administración de infraestructura Linux/UNIX, Permisos y grupos, automatización de tareas con scripts en Bash, gestión de redes, servicios de almacenamiento y rotación de respaldos.
+		  </p> 
+		  <p>
+                    Bases en Registro de windows, Active Directory, Drivers y logs en windows.
+                  </p>
+                  <div style="margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-cv-action primary" id="btn-view-pdf-sysadmin">
+                      📄 Ver PDF Oficial (sys-admin.pdf)
+                    </button>
+                    <button class="btn-cv-action" onclick="window.wm.openWindow('win-sysfiles')">
+                      📂 Explorar Carpeta sys-files/
+                    </button>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Áreas de Especialidad</h4>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Administración de Servidores Linux</div>
+                    <div class="timeline-company">Entornos Debian / Ubuntu / Arch</div>
+                    <p class="timeline-desc">
+                      Gestión de paquetes, configuración de daemons y unidades en systemd, control de accesos SSH sin contraseñas con llaves criptográficas, gestión de usuarios, permisos POSIX y auditoría de logs mediante journalctl.
+                    </p>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Automatización & Scripting</div>
+                    <div class="timeline-company">Shell Scripting (Bash / POSIX)</div>
+                    <p class="timeline-desc">
+                      Desarrollo de scripts para respaldos automáticos, rotación de archivos comprimidos, monitoreo de métricas de CPU/RAM/Disco y alertas ante caídas de servicios.
+                    </p>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Redes & Seguridad Perimetral</div>
+                    <div class="timeline-company">Firewalls & Conectividad</div>
+                    <p class="timeline-desc">
+                      Políticas de firewalling con UFW / iptables, aislamiento de puertos, túneles seguros SSH, configuración de DNS, DHCP y proxies inversos con Nginx.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Tecnologías & Herramientas SysAdmin</h4>
+                  <div class="skill-tags">
+                    <span class="skill-tag highlight">GNU/Linux</span>
+                    <span class="skill-tag highlight">Bash Scripting</span>
+                    <span class="skill-tag highlight">Systemd</span>
+                    <span class="skill-tag">SSH Hardening</span>
+                    <span class="skill-tag">UFW / iptables</span>
+                    <span class="skill-tag">Docker Containers</span>
+                    <span class="skill-tag">Nginx Reverse Proxy</span>
+                    <span class="skill-tag">rsync / Cron</span>
+                    <span class="skill-tag">Vim / Neovim</span>
+                    <span class="skill-tag">Git Version Control</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- PERFIL 3: BACKEND DEVELOPER (RUST) -->
+              <article class="cv-profile-panel" id="panel-rust">
+                <div class="profile-hero">
+                  <h3>🦀 Backend Developer (Rust)</h3>
+                  <p>
+                    Desarrollo de servicios de backend con <strong>Rust</strong>. Enfoque riguroso en seguridad de memoria, concurrencia sin condiciones de carrera (fearless concurrency), APIs de alto rendimiento con bajo consumo de CPU y memoria, y diseño de arquitecturas confiables.
+                  </p>
+                  <div style="margin-top: 14px;">
+                    <button class="btn-cv-action primary" id="btn-view-pdf-rust">
+                      📄 Ver PDF Oficial (dev.pdf)
+                    </button>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Competencias en Rust</h4>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Sistemas Concurrentes & Asíncronos</div>
+                    <div class="timeline-company">Tokio Runtime & Async/Await</div>
+                    <p class="timeline-desc">
+                      Uso de tareas asíncronas ligeras, paso de mensajes mediante canales multiproductor (<code>tokio::sync::mpsc</code>), mutexes no bloqueantes y sincronización de hilos segura en tiempo de compilación.
+                    </p>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Desarrollo de Servicios Web & APIs</div>
+                    <div class="timeline-company">Axum / Actix-Web & Ecosistema Crates</div>
+                    <p class="timeline-desc">
+                      Construcción de APIs REST y WebSocket con enrutamiento declarativo, middlewares de autenticación, validación estricta y serialización ultra-rápida con <code>serde</code> (JSON y formatos binarios).
+                    </p>
+                  </div>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Capa de Persistencia & Acceso a Datos</div>
+                    <div class="timeline-company">SQLx & Bases de Datos Relacionales</div>
+                    <p class="timeline-desc">
+                      Manejo de PostgreSQL y SQLite con comprobación de queries en tiempo de compilación, control de transacciones y pools de conexiones eficientes.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Ecosistema Backend & Habilidades</h4>
+                  <div class="skill-tags">
+                    <span class="skill-tag rust">Rust 2021/2024</span>
+                    <span class="skill-tag rust">Tokio Async</span>
+                    <span class="skill-tag rust">Axum / Actix-Web</span>
+                    <span class="skill-tag rust">Serde</span>
+                    <span class="skill-tag rust">SQLx</span>
+                    <span class="skill-tag highlight">PostgreSQL</span>
+                    <span class="skill-tag highlight">SQLite</span>
+                    <span class="skill-tag">REST APIs</span>
+                    <span class="skill-tag">Concurrencia Segura</span>
+                    <span class="skill-tag">CLI Tools en Rust</span>
+                  </div>
+                </div>
+              </article>
+
+              <!-- PERFIL 4: "YO" -->
+              <article class="cv-profile-panel" id="panel-yo">
+                <div class="profile-hero">
+                  <h3>💡 Yo: Filosofía, Taller y Pasión por la Máquina</h3>
+                  <p>
+                    Detrás de las pantallas y los comandos hay una curiosidad genuina por entender las cosas desde la raíz. Me gusta el contacto directo con la materia: desde el estaño fundiéndose con el cautín en una placa madre hasta el código Rust que compila sin errores a la primera.
+                  </p>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Sobre mi espacio de trabajo</h4>
+                  <p class="timeline-desc" style="margin-bottom: 14px;">
+                    El fondo de pantalla que ves en este escritorio es mi taller real: ahí conviven un clásico gabinete Intel i486 DX2, el cautín caliente para reparar circuitos, la taza de café infaltable y las pantallas donde escribo código y configuro servidores.
+                  </p>
+                  <blockquote style="border-left: 3px solid var(--accent); padding-left: 14px; font-style: italic; color: #cbd5e1; margin: 16px 0;">
+                    "El mundo se cae a pedazos, pero sigues de pie."
+                  </blockquote>
+                </div>
+
+                <div class="cv-section">
+                  <h4 class="cv-section-title">Lo que me define</h4>
+                  <div class="skill-tags">
+                    <span class="skill-tag">Curiosidad Incansable</span>
+                    <span class="skill-tag">Cuidado de Artesano en cada detalle</span>
+                    <span class="skill-tag">Hardware Vintage & Restauración</span>
+                    <span class="skill-tag">Música & Creatividad</span>
+                    <span class="skill-tag">Cultura Hacker & Software Libre</span>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 2: VISOR DE DOCUMENTOS PDF
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-pdf" data-title="Visor de Documentos PDF" style="top: 70px; left: 180px; width: 850px; height: 620px; display: none;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6C4.89 2 4 2.89 4 4V20C4 21.1 4.89 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" fill="#ef4444"/>
+                <path d="M14 2V8H20L14 2Z" fill="#b91c1c"/>
+              </svg>
+            </span>
+            <span>Visor de Documentos PDF</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="pdf-viewer-app">
+            <div class="pdf-toolbar">
+              <span class="pdf-title-text" id="pdf-viewer-filename">Documento</span>
+              <div class="pdf-toolbar-actions">
+                <a href="#" target="_blank" rel="noopener" class="btn-cv-action" id="pdf-download-link">
+                  🔗 Abrir / Descargar
+                </a>
+              </div>
+            </div>
+            <div class="pdf-container">
+              <div id="pdf-fallback-container" class="pdf-fallback-notice" style="display: none;">
+                <h4>📄 Archivo en preparación</h4>
+                <p id="pdf-fallback-message">
+                  El documento aún no se encuentra en la carpeta <code>cvs/</code>.<br>
+                  Puedes colocar tu archivo PDF en dicha ruta para visualizarlo directamente aquí.
+                </p>
+                <button class="btn-cv-action primary" onclick="window.wm.openWindow('win-cv');">
+                  Ver Versión Interactiva
+                </button>
+              </div>
+              <iframe id="pdf-viewer-frame" class="pdf-frame" title="Visor PDF"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 3: VISOR DE PROYECTOS WEB
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-projects" data-title="Proyectos Web" style="top: 80px; left: 220px; width: 900px; height: 600px; display: none;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="3" width="20" height="15" rx="2" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5"/>
+                <path d="M2 7H22" stroke="#38bdf8" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <span>Visor de Proyectos Web</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="projects-app">
+            <!-- Barra lateral de proyectos -->
+            <aside class="projects-sidebar">
+              <div class="projects-sidebar-header">Proyectos</div>
+              <ul class="project-list">
+                <li class="project-nav-item active" data-project="mediaweb">
+                  <span class="project-nav-name">🌸 Mediaweb</span>
+                  <span class="project-nav-tag">Multimedia & Audio</span>
+                </li>
+                <li class="project-nav-item" data-project="chess">
+                  <span class="project-nav-name">♟️ Chess</span>
+                  <span class="project-nav-tag">Juego de Ajedrez JS</span>
+                </li>
+                <li class="project-nav-item" data-project="manual">
+                  <span class="project-nav-name">📖 Manual Técnico PC</span>
+                  <span class="project-nav-tag">Operaciones & E-Box</span>
+                </li>
+              </ul>
+            </aside>
+
+            <!-- Área principal del proyecto -->
+            <div class="projects-main">
+              <div class="project-toolbar">
+                <div class="project-meta-info">
+                  <strong id="project-current-name" style="color: #fff;">Mediaweb</strong>
+                  <span class="project-status-tag" id="project-current-tag">En Vivo</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-cv-action" id="project-btn-reload" title="Recargar">🔄</button>
+                  <a href="#" target="_blank" rel="noopener" class="btn-cv-action" id="project-btn-github">📂 GitHub</a>
+                  <a href="#" target="_blank" rel="noopener" class="btn-cv-action primary" id="project-btn-external">🔗 Pantalla Completa</a>
+                </div>
+              </div>
+              <div class="project-frame-container">
+                <iframe id="project-frame" class="project-iframe" title="Frame de Proyecto"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 4: BLOC DE NOTAS
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-notepad" data-title="Bloc de Notas" style="top: 110px; left: 260px; width: 720px; height: 500px; display: none;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="4" y="3" width="16" height="18" rx="2" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5"/>
+              </svg>
+            </span>
+            <span>Bloc de Notas</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="notepad-app">
+            <aside class="notepad-sidebar">
+              <div class="notepad-sidebar-header">Archivos de Notas</div>
+              <ul class="notepad-files-list">
+                <li class="notepad-file-item active" data-file="hardware-taller.txt">hardware-taller.txt</li>
+                <li class="notepad-file-item" data-file="backend-rust.txt">backend-rust.txt</li>
+                <li class="notepad-file-item" data-file="filosofia.txt">filosofia.txt</li>
+                <li class="notepad-file-item" data-file="pendientes.txt">pendientes.txt</li>
+              </ul>
+            </aside>
+            <div class="notepad-editor-area">
+              <div class="notepad-editor-header">
+                <span id="notepad-filename-display">hardware-taller.txt</span>
+                <span id="notepad-char-count">0 caracteres</span>
+              </div>
+              <textarea id="notepad-textarea" class="notepad-textarea" spellcheck="false"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 5: EXPLORADOR DE sys-files/
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-sysfiles" data-title="Espacio SysAdmin: sys-files/" style="top: 130px; left: 300px; width: 680px; height: 440px; display: none;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M3 7V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V9C21 7.9 20.1 7 19 7H11L9 5H5C3.9 5 3 5.9 3 7Z" fill="#3b82f6"/>
+              </svg>
+            </span>
+            <span>Espacio SysAdmin: sys-files/</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="sysfiles-app">
+            <div class="sysfiles-header">
+              <h3>📂 Directorio /sys-files/</h3>
+              <p>
+                Este es tu espacio dedicado para scripts de administración de sistemas, dotfiles, automatizaciones y configuraciones de red/servidores. Cualquier archivo que guardes en la carpeta <code>sys-files/</code> forma parte de este ecosistema.
+              </p>
+            </div>
+            <div class="sysfiles-browser">
+              <div class="sysfiles-path">ivan@workshop:~/cv/sys-files$ ls -la</div>
+              <div style="color: #94a3b8; font-size: 12px; line-height: 1.8;">
+                <div>total 8</div>
+                <div>drwxr-xr-x 2 tako tako 4096 sep 17 17:35 .</div>
+                <div>drwxr-xr-x 5 tako tako 4096 sep 17 17:35 ..</div>
+                <div style="color: #38bdf8; margin-top: 10px;"># Listo para tus configuraciones y scripts de SysAdmin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==============================================================================
+       MÓDULO 4: Barra de Tareas e Interfaz Inferior
+       ============================================================================== -->
+  <footer id="taskbar">
+
+    <!-- Botón Inicio -->
+    <button class="start-button" id="start-btn">
+      <svg viewBox="0 0 24 24">
+        <path d="M4 4H10V10H4V4ZM14 4H20V10H14V4ZM4 14H10V20H4V14ZM14 14H20V20H14V14Z"/>
+      </svg>
+      <span>Inicio</span>
+    </button>
+
+    <!-- Lista de Ventanas Abiertas -->
+    <div id="taskbar-windows"></div>
+
+    <!-- Bandeja del Sistema (Tray) -->
+    <div class="system-tray">
+      <div class="tray-status">
+        <span class="tray-status-indicator"></span>
+        <span style="font-family: var(--font-mono);">Online</span>
+      </div>
+      <div class="tray-clock">
+        <span class="tray-time" id="tray-time">12:00:00</span>
+        <span class="tray-date" id="tray-date">vie, 17 sep</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Menú de Inicio Desplegable -->
+  <div id="start-menu">
+    <div class="start-header">
+      <div class="start-avatar">IA</div>
+      <div class="start-user-info">
+        <span class="start-user-name">Iván Arévalo</span>
+        <span class="start-user-role">Hardware • SysAdmin • Rust Dev</span>
+      </div>
+    </div>
+
+    <div class="start-menu-items">
+      <div class="start-item" data-open-win="win-cv" data-cv-tab="tecnico">
+        <div class="start-item-icon">⚙️</div>
+        <div class="start-item-details">
+          <span class="start-item-title">CV Técnico en Sistemas</span>
+          <span class="start-item-desc">Mantenimiento, fuentes y control industrial</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-cv" data-cv-tab="sysadmin">
+        <div class="start-item-icon">🐧</div>
+        <div class="start-item-details">
+          <span class="start-item-title">CV Sys Admin</span>
+          <span class="start-item-desc">Infraestructura Linux, redes y bash</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-cv" data-cv-tab="rust">
+        <div class="start-item-icon">🦀</div>
+        <div class="start-item-details">
+          <span class="start-item-title">CV Backend Rust</span>
+          <span class="start-item-desc">APIs concurrentes y alto rendimiento</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-cv" data-cv-tab="yo">
+        <div class="start-item-icon">💡</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Perfil "Yo"</span>
+          <span class="start-item-desc">Filosofía, taller y biografía personal</span>
+        </div>
+      </div>
+
+      <div class="start-divider"></div>
+
+      <div class="start-item" data-open-pdf="cvs/tecnicio%20en%20sistemas.pdf" data-pdf-title="CV - Técnico en Sistemas (Iván Arévalo).pdf">
+        <div class="start-item-icon">📄</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Ver PDF Técnico</span>
+          <span class="start-item-desc">tecnicio en sistemas.pdf</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-pdf="cvs/sys-admin.pdf" data-pdf-title="CV - Sys Admin (Iván Arévalo).pdf">
+        <div class="start-item-icon">📄</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Ver PDF SysAdmin</span>
+          <span class="start-item-desc">sys-admin.pdf</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-pdf="cvs/dev.pdf" data-pdf-title="CV - Backend Developer Rust (Iván Arévalo).pdf">
+        <div class="start-item-icon">📄</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Ver PDF Rust Dev</span>
+          <span class="start-item-desc">dev.pdf</span>
+        </div>
+      </div>
+
+      <div class="start-divider"></div>
+
+      <div class="start-item" data-open-win="win-projects">
+        <div class="start-item-icon">🚀</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Proyectos Web</span>
+          <span class="start-item-desc">Mediaweb, Chess, Manual Técnico</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-notepad">
+        <div class="start-item-icon">📝</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Bloc de Notas</span>
+          <span class="start-item-desc">Apuntes de hardware y código</span>
+        </div>
+      </div>
+
+      <a href="https://github.com/IvanMatias1618" target="_blank" rel="noopener" class="start-item">
+        <div class="start-item-icon">🐙</div>
+        <div class="start-item-details">
+          <span class="start-item-title">GitHub (@IvanMatias1618)</span>
+          <span class="start-item-desc">Repositorios y código fuente</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="start-footer">
+      <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">IvanOS v2.6</span>
+      <button class="shutdown-btn" id="btn-shutdown">⏻ Apagar</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de Apagado CRT Simulada -->
+  <div id="screen-off">
+    <div style="font-size: 40px; margin-bottom: 16px;">⚡</div>
+    <div style="font-size: 18px; margin-bottom: 8px;">Sistema Suspendido / Apagado</div>
+    <div style="font-size: 13px; color: #86efac; opacity: 0.8;">Taller de Iván Arévalo — Estación i486</div>
+    <button class="power-on-btn" id="btn-power-on">Encender Sistema</button>
+  </div>
+
+  <!-- Scripts del Sistema -->
+  <script src="window-manager.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
