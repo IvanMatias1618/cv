@@ -1,0 +1,9 @@
+[submodule "programs/chess"]
+	path = programs/chess
+	url = https://github.com/IvanMatias1618/chess.git
+[submodule "programs/Manual-tecnico_PC"]
+	path = programs/Manual-tecnico_PC
+	url = https://github.com/IvanMatias1618/Manual-tecnico_PC.git
+[submodule "programs/Mediaweb"]
+	path = programs/Mediaweb
+	url = https://github.com/IvanMatias1618/Mediaweb.git
