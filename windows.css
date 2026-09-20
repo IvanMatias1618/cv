@@ -128,6 +128,7 @@
   background: rgba(15, 23, 42, 0.7);
   display: flex;
   flex-direction: column;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Tirador de Redimensión en esquina inferior derecha */
@@ -763,30 +764,363 @@
 
 /* Adaptabilidad para móviles y pantallas reducidas */
 @media (max-width: 768px) {
+  /* En móvil la ventana ocupa la pantalla completa sobre la barra de tareas */
   .window {
-    min-width: 95vw !important;
-    max-width: 98vw !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: var(--total-taskbar-height, var(--taskbar-height)) !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: calc(100% - var(--taskbar-height)) !important;
+    height: calc(100dvh - var(--total-taskbar-height, var(--taskbar-height))) !important;
+    min-height: 0 !important;
+    border-radius: 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    box-shadow: none !important;
   }
+
+  .window-resize-handle {
+    display: none !important;
+  }
+
+  .window-header {
+    height: 42px;
+    padding: 0 10px;
+    cursor: default;
+    touch-action: none;
+  }
+
+  .window-title {
+    font-size: 12px;
+    max-width: calc(100vw - 100px);
+  }
+
+  .win-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+
+  .win-max {
+    display: none !important; /* Ya está a pantalla completa en móviles */
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 1: CV Interactivo
+     -------------------------------------------------------------------------- */
+  .cv-topbar {
+    padding: 10px 14px;
+    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cv-candidate-info {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .candidate-avatar {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .candidate-meta h2 {
+    font-size: 15px;
+  }
+
+  .candidate-meta p {
+    flex-direction: column;
+    gap: 3px;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  .cv-actions {
+    width: 100%;
+  }
+
+  .cv-actions .btn-cv-action {
+    width: 100%;
+    justify-content: center;
+    padding: 7px 12px;
+    font-size: 11.5px;
+  }
+
+  .cv-tabs-bar {
+    padding: 0 4px;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cv-tab-btn {
+    padding: 10px 14px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .cv-content-area {
+    padding: 14px 12px;
+  }
+
+  .profile-hero {
+    padding: 14px;
+    margin-bottom: 16px;
+  }
+
+  .profile-hero h3 {
+    font-size: 15px;
+    line-height: 1.35;
+    flex-wrap: wrap;
+  }
+
+  .profile-hero p {
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+
+  .profile-hero .btn-cv-action {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .cv-section {
+    margin-bottom: 20px;
+  }
+
+  .cv-section-title {
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .timeline-item {
+    padding-left: 16px;
+    margin-bottom: 16px;
+  }
+
+  .timeline-item::before {
+    left: -5px;
+    width: 8px;
+    height: 8px;
+  }
+
+  .timeline-role {
+    font-size: 13.5px;
+  }
+
+  .timeline-company {
+    font-size: 12px;
+  }
+
+  .timeline-date {
+    font-size: 11px;
+  }
+
+  .timeline-desc {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .skill-tags {
+    gap: 6px;
+  }
+
+  .skill-tag {
+    padding: 3px 8px;
+    font-size: 11px;
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 2: Visor de PDF
+     -------------------------------------------------------------------------- */
+  .pdf-toolbar {
+    padding: 8px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .pdf-title-text {
+    font-size: 11px;
+    max-width: 180px;
+  }
+
+  .pdf-toolbar-actions .btn-cv-action {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .pdf-fallback-notice {
+    width: 90%;
+    max-width: 340px;
+    padding: 16px;
+  }
+
+  .pdf-fallback-notice h4 {
+    font-size: 14px;
+  }
+
+  .pdf-fallback-notice p {
+    font-size: 12px;
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 3: Visor de Proyectos Web
+     -------------------------------------------------------------------------- */
   .projects-app {
     flex-direction: column;
   }
+
   .projects-sidebar {
     width: 100%;
-    height: 120px;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
+
+  .projects-sidebar-header {
+    display: none;
+  }
+
+  .project-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px 8px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .project-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-nav-item {
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+
+  .project-nav-name {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .project-nav-tag {
+    display: none;
+  }
+
+  .project-toolbar {
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .project-meta-info {
+    gap: 6px;
+  }
+
+  .project-meta-info strong {
+    font-size: 12px;
+  }
+
+  .project-status-tag {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+
+  .project-toolbar .btn-cv-action {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 4: Bloc de Notas
+     -------------------------------------------------------------------------- */
   .notepad-app {
     flex-direction: column;
   }
+
   .notepad-sidebar {
     width: 100%;
-    height: 100px;
+    height: auto;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
-  .cv-topbar {
-    flex-direction: column;
-    align-items: flex-start;
+
+  .notepad-sidebar-header {
+    display: none;
+  }
+
+  .notepad-files-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px 8px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .notepad-files-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .notepad-file-item {
+    flex-shrink: 0;
+    padding: 5px 10px;
+    font-size: 11.5px;
+    white-space: nowrap;
+  }
+
+  .notepad-editor-header {
+    padding: 6px 10px;
+    font-size: 10.5px;
+  }
+
+  .notepad-textarea {
+    padding: 12px;
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 5: Explorador sys-files/
+     -------------------------------------------------------------------------- */
+  .sysfiles-app {
+    padding: 12px;
+  }
+
+  .sysfiles-header {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .sysfiles-header h3 {
+    font-size: 13px;
+  }
+
+  .sysfiles-header p {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .sysfiles-browser {
+    padding: 10px 12px;
+  }
+
+  .sysfiles-path {
+    font-size: 11px;
+    word-break: break-all;
+    margin-bottom: 8px;
   }
 }

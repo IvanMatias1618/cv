@@ -26,6 +26,20 @@ class WindowManager {
         this.deactivateAllWindows();
       }
     });
+
+    // Adaptar dinámicamente si el usuario cambia el tamaño o rota la pantalla
+    window.addEventListener('resize', () => {
+      if (window.innerWidth <= 768) {
+        this.windows.forEach((win) => {
+          if (win.isOpen && !win.isMaximized) {
+            win.element.style.top = '';
+            win.element.style.left = '';
+            win.element.style.width = '';
+            win.element.style.height = '';
+          }
+        });
+      }
+    });
   }
 
   registerWindow(winEl) {
@@ -90,9 +104,10 @@ class WindowManager {
       });
     }
 
-    // Doble clic en cabecera para maximizar
+    // Doble clic en cabecera para maximizar (solo en desktop)
     if (header) {
       header.addEventListener('dblclick', (e) => {
+        if (window.innerWidth <= 768) return;
         if (!e.target.closest('.win-btn')) {
           this.toggleMaximize(winId);
         }
@@ -129,19 +144,18 @@ class WindowManager {
     win.element.classList.remove('minimized');
     win.element.style.display = 'flex';
 
-    // Si la ventana no tiene posición definida o se abre por primera vez
-    if (!win.element.style.top || !win.element.style.left) {
+    // Si es móvil, limpiar estilos fijos inline para que mande el CSS responsive
+    if (window.innerWidth <= 768) {
+      win.element.style.top = '';
+      win.element.style.left = '';
+      win.element.style.width = '';
+      win.element.style.height = '';
+    } else if (!win.element.style.top || !win.element.style.left) {
       const desktop = document.getElementById('desktop');
       const dWidth = desktop.clientWidth;
       const dHeight = desktop.clientHeight;
 
-      if (window.innerWidth <= 768) {
-        // En móviles, abrir casi pantalla completa
-        win.element.style.top = '10px';
-        win.element.style.left = '5px';
-        win.element.style.width = 'calc(100vw - 10px)';
-        win.element.style.height = 'calc(100vh - 65px)';
-      } else if (defaultCoords) {
+      if (defaultCoords) {
         win.element.style.top = `${defaultCoords.top}px`;
         win.element.style.left = `${defaultCoords.left}px`;
         if (defaultCoords.width) win.element.style.width = `${defaultCoords.width}px`;
@@ -242,6 +256,7 @@ class WindowManager {
       // Ignorar si se presiona sobre un botón de la cabecera
       if (e.target.closest('.win-btn')) return;
       if (winEl.classList.contains('maximized')) return;
+      if (window.innerWidth <= 768) return; // En móvil no arrastrar la ventana
 
       isDragging = true;
       headerEl.setPointerCapture(e.pointerId);
@@ -301,6 +316,7 @@ class WindowManager {
 
     handleEl.addEventListener('pointerdown', (e) => {
       if (winEl.classList.contains('maximized')) return;
+      if (window.innerWidth <= 768) return; // En móvil no redimensionar la ventana
 
       isResizing = true;
       handleEl.setPointerCapture(e.pointerId);
@@ -421,7 +437,11 @@ class WindowManager {
       iframe.src = pdfUrl;
     }
 
-    this.openWindow('win-pdf', { top: 60, left: 180, width: 850, height: 600 });
+    if (window.innerWidth <= 768) {
+      this.openWindow('win-pdf');
+    } else {
+      this.openWindow('win-pdf', { top: 60, left: 180, width: 850, height: 600 });
+    }
   }
 }
 

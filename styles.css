@@ -17,6 +17,9 @@
   --accent-amber: #f59e0b;
   --shadow-window: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 1px rgba(255, 255, 255, 0.1);
   --taskbar-height: 44px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --total-taskbar-height: calc(var(--taskbar-height) + var(--safe-bottom));
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: "Fira Code", "JetBrains Mono", "Cascadia Code", Consolas, monospace;
 }
@@ -43,8 +46,9 @@ html, body {
    ------------------------------------------------------------------------------ */
 #desktop {
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: calc(100vh - var(--taskbar-height));
+  height: calc(100dvh - var(--total-taskbar-height));
   background-image: 
     radial-gradient(ellipse at center, rgba(15, 23, 42, 0.55) 0%, rgba(7, 11, 21, 0.88) 100%),
     url('wallpapers/pc.jpeg');
@@ -242,22 +246,49 @@ html, body {
 /* Responsive para dispositivos móviles */
 @media (max-width: 768px) {
   #desktop-icons {
-    top: 10px;
-    left: 10px;
-    gap: 10px;
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px 6px;
+    align-content: start;
+    justify-items: center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #desktop-icons::-webkit-scrollbar {
+    display: none;
   }
   .desktop-icon {
-    width: 74px;
+    width: 100%;
+    max-width: 82px;
     padding: 6px 2px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .desktop-icon:active {
+    background-color: rgba(56, 189, 248, 0.3);
+    transform: scale(0.95);
   }
   .desktop-icon .icon-img {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
   }
   .desktop-icon .icon-label {
-    font-size: 10.5px;
+    font-size: 11px;
+    max-width: 78px;
   }
   .workshop-banner {
     display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  #desktop-icons {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px 4px;
   }
 }

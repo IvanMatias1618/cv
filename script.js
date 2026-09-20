@@ -33,7 +33,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Abrir por defecto la ventana del CV para que el reclutador/visitante vea el contenido de inmediato
   setTimeout(() => {
-    window.wm.openWindow('win-cv', { top: 40, left: 140, width: 880, height: 600 });
+    if (window.innerWidth <= 768) {
+      window.wm.openWindow('win-cv');
+    } else {
+      window.wm.openWindow('win-cv', { top: 40, left: 140, width: 880, height: 600 });
+    }
   }, 400);
 });
 
@@ -141,9 +145,9 @@ function initDesktopIcons() {
       const isDoubleClick = lastClickedIcon === icon && currentTime - lastClickTime < 350;
 
       // En móviles o pantallas táctiles permitimos click directo, en desktop doble click
-      const isTouch = window.matchMedia('(pointer: coarse)').matches;
+      const isMobileDevice = window.innerWidth <= 768 || window.matchMedia('(pointer: coarse)').matches;
 
-      if (isDoubleClick || isTouch) {
+      if (isDoubleClick || isMobileDevice) {
         launchIconAction(icon);
       }
 
