@@ -97,6 +97,20 @@
         <span class="icon-label">Proyectos</span>
       </div>
 
+      <!-- 5.1 Centro de Juegos Arcade -->
+      <div class="desktop-icon" data-action="open-window" data-window="win-games" title="Abrir Centro de Juegos Arcade">
+        <div class="icon-img">
+          <svg viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="6" width="20" height="12" rx="6" fill="#8b5cf6" stroke="#c084fc" stroke-width="1.5"/>
+            <path d="M6 12H10M8 10V14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="15" cy="11" r="1.2" fill="#ffffff"/>
+            <circle cx="17.5" cy="13" r="1.2" fill="#ffffff"/>
+          </svg>
+        </div>
+        <span class="icon-label">Juegos</span>
+        <span class="badge badge-game">ARCADE</span>
+      </div>
+
       <!-- 6. Directorio sys-files/ -->
       <div class="desktop-icon" data-action="open-window" data-window="win-sysfiles" title="Abrir carpeta de configuración sys-files">
         <div class="icon-img">
@@ -360,6 +374,33 @@
                 </div>
 
                 <div class="cv-section">
+                  <h4 class="cv-section-title">Proyectos Reales en Rust</h4>
+                  <div class="timeline-item">
+                    <div class="timeline-role">Finite (Backend Marketplace & Gestor Modular)</div>
+                    <div class="timeline-company">Rust 2024 • Tokio • Axum 0.8 • SQLx PostgreSQL • JWT • ts-rs</div>
+                    <p class="timeline-desc">
+                      Servicio backend desacoplado para gestión de negocios, colaboradores, autenticación segura con JWT/bcrypt y roles. Manejo de concurrencia con Tokio runtime, generación automática de contratos de TypeScript mediante <code>ts-rs</code> y CORS habilitado para cliente frontend en React.
+                    </p>
+                    <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="https://github.com/IvanMatias1618/finit" target="_blank" rel="noopener" class="btn-cv-action">🐙 Repositorio finit</a>
+                      <button class="btn-cv-action primary" onclick="window.wm.openWindow('win-projects'); if(window.loadProjectByKey) window.loadProjectByKey('marketplace');">🔍 Ver en Proyectos</button>
+                    </div>
+                  </div>
+
+                  <div class="timeline-item">
+                    <div class="timeline-role">sis-inventario-rust (Microservicio de Insumos y Recetas)</div>
+                    <div class="timeline-company">Rust • Actix-web • REST API • CORS • Sector Gastronómico</div>
+                    <p class="timeline-desc">
+                      API REST de alto rendimiento en Rust con Actix-web para el control de inventario, registro de insumos y estructuración de recetas compuestas con cálculo de costos en tiempo real, conectado a cliente TypeScript.
+                    </p>
+                    <div style="margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="https://github.com/IvanMatias1618/sis-inventario-rust" target="_blank" rel="noopener" class="btn-cv-action">🐙 Repositorio sis-inventario-rust</a>
+                      <button class="btn-cv-action primary" onclick="window.wm.openWindow('win-projects'); if(window.loadProjectByKey) window.loadProjectByKey('inventario');">🔍 Ver en Proyectos</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cv-section">
                   <h4 class="cv-section-title">Ecosistema Backend & Habilidades</h4>
                   <div class="skill-tags">
                     <span class="skill-tag rust">Rust 2021/2024</span>
@@ -491,17 +532,21 @@
             <aside class="projects-sidebar">
               <div class="projects-sidebar-header">Proyectos</div>
               <ul class="project-list">
-                <li class="project-nav-item active" data-project="mediaweb">
-                  <span class="project-nav-name">🌸 Mediaweb</span>
-                  <span class="project-nav-tag">Multimedia & Audio</span>
+                <li class="project-nav-item active" data-project="marketplace">
+                  <span class="project-nav-name">🛒 Marketplace & Gestor</span>
+                  <span class="project-nav-tag">Rust (Axum) • React • Postgres</span>
                 </li>
-                <li class="project-nav-item" data-project="chess">
-                  <span class="project-nav-name">♟️ Chess</span>
-                  <span class="project-nav-tag">Juego de Ajedrez JS</span>
+                <li class="project-nav-item" data-project="inventario">
+                  <span class="project-nav-name">📦 Sistema de Inventario</span>
+                  <span class="project-nav-tag">Rust (Actix) • TS • Video Demo</span>
+                </li>
+                <li class="project-nav-item" data-project="mediaweb">
+                  <span class="project-nav-name">🌸 Mediaweb</span>
+                  <span class="project-nav-tag">Multimedia & Audio Web</span>
                 </li>
                 <li class="project-nav-item" data-project="manual">
                   <span class="project-nav-name">📖 Manual Técnico PC</span>
-                  <span class="project-nav-tag">Operaciones & E-Box</span>
+                  <span class="project-nav-tag">Operaciones & Control Industrial</span>
                 </li>
               </ul>
             </aside>
@@ -510,17 +555,22 @@
             <div class="projects-main">
               <div class="project-toolbar">
                 <div class="project-meta-info">
-                  <strong id="project-current-name" style="color: #fff;">Mediaweb</strong>
-                  <span class="project-status-tag" id="project-current-tag">En Vivo</span>
+                  <strong id="project-current-name" style="color: #fff;">Marketplace & Gestor</strong>
+                  <span class="project-status-tag" id="project-current-tag">Full-Stack</span>
                 </div>
-                <div style="display: flex; gap: 8px;">
-                  <button class="btn-cv-action" id="project-btn-reload" title="Recargar">🔄</button>
-                  <a href="#" target="_blank" rel="noopener" class="btn-cv-action" id="project-btn-github">📂 GitHub</a>
-                  <a href="#" target="_blank" rel="noopener" class="btn-cv-action primary" id="project-btn-external">🔗 Pantalla Completa</a>
+                <div id="project-toolbar-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                  <!-- Acciones pobladas dinámicamente -->
                 </div>
               </div>
-              <div class="project-frame-container">
+              
+              <!-- Contenedor iframe para proyectos interactivos -->
+              <div class="project-frame-container" id="project-frame-box" style="display: none;">
                 <iframe id="project-frame" class="project-iframe" title="Frame de Proyecto"></iframe>
+              </div>
+
+              <!-- Contenedor Showcase para proyectos fullstack con imágenes y video -->
+              <div class="project-showcase" id="project-showcase-box">
+                <!-- Se inyecta dinámicamente -->
               </div>
             </div>
           </div>
@@ -576,7 +626,7 @@
       <!-- --------------------------------------------------------------------------
            VENTANA 5: EXPLORADOR DE sys-files/
            -------------------------------------------------------------------------- -->
-      <section class="window" id="win-sysfiles" data-title="Espacio SysAdmin: sys-files/" style="top: 130px; left: 300px; width: 680px; height: 440px; display: none;">
+      <section class="window" id="win-sysfiles" data-title="Espacio SysAdmin: sys-files/" style="top: 120px; left: 280px; width: 840px; height: 530px; display: none;">
         <header class="window-header">
           <div class="window-title">
             <span class="window-title-icon">
@@ -595,19 +645,135 @@
 
         <div class="window-body">
           <div class="sysfiles-app">
-            <div class="sysfiles-header">
-              <h3>📂 Directorio /sys-files/</h3>
-              <p>
-                Este es tu espacio dedicado para scripts de administración de sistemas, dotfiles, automatizaciones y configuraciones de red/servidores. Cualquier archivo que guardes en la carpeta <code>sys-files/</code> forma parte de este ecosistema.
-              </p>
+            <!-- Sidebar: Árbol de carpetas y archivos -->
+            <aside class="sysfiles-sidebar">
+              <div class="sysfiles-sidebar-header">
+                <span>📁 sys-files/</span>
+              </div>
+              <ul class="sysfiles-tree">
+                <!-- 1. concepts/ -->
+                <li>
+                  <div class="sysfiles-folder-title">📁 concepts/</div>
+                  <ul class="sysfiles-folder-files">
+                    <li class="sysfiles-file-item active" data-sysfile="concepts/iptables.md">
+                      <span>📄</span>
+                      <span>iptables.md</span>
+                    </li>
+                  </ul>
+                </li>
+                <!-- 2. utils/ -->
+                <li>
+                  <div class="sysfiles-folder-title">📁 utils/</div>
+                  <ul class="sysfiles-folder-files">
+                    <li class="sysfiles-file-item" data-sysfile="utils/disk-manager.sh">
+                      <span>⚙️</span>
+                      <span>disk-manager.sh</span>
+                    </li>
+                  </ul>
+                </li>
+                <!-- 3. man/ -->
+                <li>
+                  <div class="sysfiles-folder-title">📁 man/</div>
+                  <ul class="sysfiles-folder-files">
+                    <li class="sysfiles-file-item" data-sysfile="man/tmux.md">
+                      <span>📖</span>
+                      <span>tmux.md</span>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </aside>
+
+            <!-- Área principal de código y ejecución -->
+            <div class="sysfiles-main">
+              <div class="sysfiles-toolbar">
+                <div class="sysfiles-file-meta">
+                  <span id="sysfile-current-path" style="color: #60a5fa; font-weight: 600;">sys-files/concepts/iptables.md</span>
+                  <span class="sysfiles-badge-type" id="sysfile-current-badge">MARKDOWN</span>
+                  <span id="sysfile-current-perm" style="color: #94a3b8; font-size: 10.5px;">-rw-r--r--</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-cv-action" id="sysfile-btn-run" style="display: none; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #86efac;">
+                    ▶ Ejecutar Script
+                  </button>
+                  <button class="btn-cv-action" id="sysfile-btn-copy">📋 Copiar</button>
+                </div>
+              </div>
+
+              <div class="sysfiles-code-container">
+                <pre class="sysfiles-code-pre" id="sysfiles-code-view"></pre>
+              </div>
+
+              <!-- Terminal interactiva simulada para scripts .sh -->
+              <div class="sysfiles-terminal-box" id="sysfiles-term-box" style="display: none;">
+                <div class="sysfiles-term-header">
+                  <span>TERMINAL OUTPUT — BASH</span>
+                  <button class="btn-cv-action" id="sysfiles-term-close" style="padding: 1px 6px; font-size: 10px;">✕</button>
+                </div>
+                <pre id="sysfiles-term-content" style="margin: 0; font-family: var(--font-mono); font-size: 11px;"></pre>
+              </div>
             </div>
-            <div class="sysfiles-browser">
-              <div class="sysfiles-path">ivan@workshop:~/cv/sys-files$ ls -la</div>
-              <div style="color: #94a3b8; font-size: 12px; line-height: 1.8;">
-                <div>total 8</div>
-                <div>drwxr-xr-x 2 tako tako 4096 sep 17 17:35 .</div>
-                <div>drwxr-xr-x 5 tako tako 4096 sep 17 17:35 ..</div>
-                <div style="color: #38bdf8; margin-top: 10px;"># Listo para tus configuraciones y scripts de SysAdmin</div>
+          </div>
+        </div>
+
+        <div class="window-resize-handle"></div>
+      </section>
+
+      <!-- --------------------------------------------------------------------------
+           VENTANA 6: CENTRO DE JUEGOS ARCADE
+           -------------------------------------------------------------------------- -->
+      <section class="window" id="win-games" data-title="Centro de Juegos Arcade" style="top: 85px; left: 240px; width: 920px; height: 620px; display: none;">
+        <header class="window-header">
+          <div class="window-title">
+            <span class="window-title-icon">
+              <svg viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="6" width="20" height="12" rx="6" fill="#8b5cf6" stroke="#c084fc" stroke-width="1.5"/>
+                <path d="M6 12H10M8 10V14" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="15" cy="11" r="1.2" fill="#ffffff"/>
+                <circle cx="17.5" cy="13" r="1.2" fill="#ffffff"/>
+              </svg>
+            </span>
+            <span>Centro de Juegos Arcade</span>
+          </div>
+          <div class="window-controls">
+            <button class="win-btn win-min" title="Minimizar">🗕</button>
+            <button class="win-btn win-max" title="Maximizar">🗖</button>
+            <button class="win-btn win-close" title="Cerrar">✕</button>
+          </div>
+        </header>
+
+        <div class="window-body">
+          <div class="games-app">
+            <!-- Barra lateral de juegos -->
+            <aside class="games-sidebar">
+              <div class="games-sidebar-header">Biblioteca de Juegos</div>
+              <ul class="games-list">
+                <li class="game-nav-item active" data-game="jsgame">
+                  <span class="game-nav-name">🕹️ Little Game Trivia</span>
+                  <span class="game-nav-tag">JSGAME • 2D Grid Game</span>
+                </li>
+                <li class="game-nav-item" data-game="chess">
+                  <span class="game-nav-name">♟️ Chess</span>
+                  <span class="game-nav-tag">Ajedrez en JavaScript</span>
+                </li>
+              </ul>
+            </aside>
+
+            <!-- Área principal del juego -->
+            <div class="games-main">
+              <div class="game-toolbar">
+                <div class="game-meta-info">
+                  <strong id="game-current-name" style="color: #fff;">Little Game Trivia (JSGAME)</strong>
+                  <span class="game-status-tag" id="game-current-tag">Jugable</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-cv-action" id="game-btn-reload" title="Reiniciar Juego">🔄 Reiniciar</button>
+                  <a href="https://github.com/IvanMatias1618/JSGAME" target="_blank" rel="noopener" class="btn-cv-action" id="game-btn-github">📂 GitHub</a>
+                  <a href="programs/JSGAME/index.html" target="_blank" rel="noopener" class="btn-cv-action primary" id="game-btn-external">🔗 Pantalla Completa</a>
+                </div>
+              </div>
+              <div class="game-frame-container">
+                <iframe id="game-frame" class="game-iframe" src="programs/JSGAME/index.html" title="Ventana del Juego"></iframe>
               </div>
             </div>
           </div>
@@ -722,8 +888,24 @@
       <div class="start-item" data-open-win="win-projects">
         <div class="start-item-icon">🚀</div>
         <div class="start-item-details">
-          <span class="start-item-title">Proyectos Web</span>
-          <span class="start-item-desc">Mediaweb, Chess, Manual Técnico</span>
+          <span class="start-item-title">Proyectos Web & Rust</span>
+          <span class="start-item-desc">Marketplace, Inventario, Mediaweb, Manual</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-games">
+        <div class="start-item-icon">🎮</div>
+        <div class="start-item-details">
+          <span class="start-item-title">Centro de Juegos Arcade</span>
+          <span class="start-item-desc">Little Game Trivia (JSGAME), Chess</span>
+        </div>
+      </div>
+
+      <div class="start-item" data-open-win="win-sysfiles">
+        <div class="start-item-icon">📂</div>
+        <div class="start-item-details">
+          <span class="start-item-title">sys-files/ (SysAdmin)</span>
+          <span class="start-item-desc">concepts/, utils/, man/</span>
         </div>
       </div>
 
@@ -747,6 +929,15 @@
     <div class="start-footer">
       <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono);">IvanOS v2.6</span>
       <button class="shutdown-btn" id="btn-shutdown">⏻ Apagar</button>
+    </div>
+  </div>
+
+  <!-- Modal Lightbox para visualización de capturas -->
+  <div id="image-lightbox" class="image-lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close-btn" title="Cerrar">✕</button>
+      <img id="lightbox-img" src="" alt="Captura ampliada">
+      <div id="lightbox-caption" class="lightbox-caption"></div>
     </div>
   </div>
 

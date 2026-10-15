@@ -1,9 +1,31 @@
+# Repositorios y Enlaces de Proyectos - Iván Arévalo (@IvanMatias1618)
+
+Proyecto: "Marketplace & Gestor (Backend: finit | Frontend: okupo)"
+Backend_Repo: "https://github.com/IvanMatias1618/finit"
+Frontend_Repo: "https://github.com/IvanMatias1618/okupo"
+Descripcion: "Plataforma de gestión de negocios y marketplace modular. Rust (Axum, Tokio, SQLx, Postgres, JWT) + React (TypeScript, Vite)."
+
+Proyecto: "Sistema de Inventario (Backend: sis-inventario-rust | Frontend: inventario-front)"
+Backend_Repo: "https://github.com/IvanMatias1618/sis-inventario-rust"
+Frontend_Repo: "https://github.com/IvanMatias1618/inventario-front"
+Descripcion: "Control de existencias de insumos y recetas para el sector gastronómico. Rust (Actix-web) + TypeScript/Vite."
+
 Proyecto: "Mediaweb"
+Repo: "https://github.com/IvanMatias1618/Mediaweb"
 Readme: "https://github.com/IvanMatias1618/Mediaweb/blob/main/README.md"
-Page: "..."
+Descripcion: "Aplicación interactiva multimedia con reproductor de audio, efectos visuales y minijuego embebido."
+
+Proyecto: "Manual Técnico PC"
+Repo: "https://github.com/IvanMatias1618/Manual-tecnico_PC"
+Readme: "https://github.com/IvanMatias1618/Manual-tecnico_PC/blob/main/README.md"
+Descripcion: "Documentación técnica interactiva para soporte en hardware, gabinetes E-Box, calibración y operaciones."
+
+Proyecto: "Little Game Trivia (JSGAME)"
+Repo: "https://github.com/IvanMatias1618/JSGAME"
+Readme: "https://github.com/IvanMatias1618/JSGAME/blob/main/README.md"
+Descripcion: "Aventura 2D por casillas implementada en JavaScript modular con cuadrícula dinámica."
+
 Proyecto: "Chess"
-Readme: "https://github.com/IvanMatias1618/Mediaweb/blob/main/README.md"
-Page: "..."
-Proyecto: "Manual-tecnico"
-Readme: "https://github.com/IvanMatias1618/Mediaweb/blob/main/README.md"
-Page: "..."
+Repo: "https://github.com/IvanMatias1618/chess"
+Readme: "https://github.com/IvanMatias1618/chess/blob/main/README.md"
+Descripcion: "Juego de ajedrez en JavaScript con renderizado de casillas, sprites y control de turnos."

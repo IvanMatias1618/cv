@@ -1,0 +1,2322 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manual Técnico de Operaciones | Sistemas de Sala & E-Box WIGOS</title>
+  <meta name="description" content="Manual técnico profesional para soporte de terminales, E-Box, periféricos y sistemas de sala WIGOS.">
+  <style>
+    /* ==========================================================================
+       VARIABLES DE COLOR Y DISEÑO
+       ========================================================================== */
+    :root {
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      
+      /* Modo Oscuro (Por defecto) */
+      --bg-body: #0b0f17;
+      --bg-sidebar: #111827;
+      --bg-card: #161f30;
+      --bg-card-hover: #1c273c;
+      --bg-card-alt: #0d1422;
+      --border-color: #243047;
+      --border-color-focus: #38bdf8;
+      
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      
+      --primary: #38bdf8;
+      --primary-hover: #0ea5e9;
+      --primary-rgb: 56, 189, 248;
+      
+      --success: #34d399;
+      --success-bg: rgba(52, 211, 153, 0.1);
+      --success-border: rgba(52, 211, 153, 0.25);
+      
+      --warning: #fbbf24;
+      --warning-bg: rgba(251, 191, 36, 0.1);
+      --warning-border: rgba(251, 191, 36, 0.25);
+      
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.1);
+      --danger-border: rgba(248, 113, 113, 0.25);
+      
+      --info: #60a5fa;
+      --info-bg: rgba(96, 165, 250, 0.1);
+      --info-border: rgba(96, 165, 250, 0.25);
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
+      --radius: 8px;
+      --radius-lg: 12px;
+      --header-height: 64px;
+      --sidebar-width: 290px;
+    }
+
+    [data-theme="light"] {
+      --bg-body: #f8fafc;
+      --bg-sidebar: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --bg-card-alt: #f1f5f9;
+      --border-color: #e2e8f0;
+      --border-color-focus: #0284c7;
+      
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #94a3b8;
+      
+      --primary: #0284c7;
+      --primary-hover: #0369a1;
+      --primary-rgb: 2, 132, 199;
+      
+      --success: #059669;
+      --success-bg: rgba(5, 150, 105, 0.08);
+      --success-border: rgba(5, 150, 105, 0.25);
+      
+      --warning: #d97706;
+      --warning-bg: rgba(217, 119, 6, 0.08);
+      --warning-border: rgba(217, 119, 6, 0.25);
+      
+      --danger: #dc2626;
+      --danger-bg: rgba(220, 38, 38, 0.08);
+      --danger-border: rgba(220, 38, 38, 0.25);
+      
+      --info: #2563eb;
+      --info-bg: rgba(37, 99, 235, 0.08);
+      --info-border: rgba(37, 99, 235, 0.25);
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ==========================================================================
+       RESET Y ESTILOS BASE
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: var(--primary-hover);
+    }
+
+    code, kbd {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      color: var(--primary);
+    }
+
+    kbd {
+      box-shadow: 0 2px 0 var(--border-color);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       CABECERA SUPERIOR FIJA
+       ========================================================================== */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: var(--bg-sidebar);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .topbar-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .search-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box input {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem 0.45rem 2.2rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      width: 220px;
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--border-color-focus);
+      width: 280px;
+      box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 0.75rem;
+      width: 15px;
+      height: 15px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .btn-icon {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      border-radius: var(--radius);
+      padding: 0.45rem 0.65rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-mobile-toggle {
+      display: none;
+    }
+
+    /* ==========================================================================
+       DISPOSICIÓN PRINCIPAL (LAYOUT)
+       ========================================================================== */
+    .app-container {
+      display: flex;
+      margin-top: var(--header-height);
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    /* ==========================================================================
+       SIDEBAR / MENÚ DE NAVEGACIÓN LATERAL
+       ========================================================================== */
+    .sidebar {
+      width: var(--sidebar-width);
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-color);
+      position: fixed;
+      top: var(--header-height);
+      bottom: 0;
+      left: 0;
+      overflow-y: auto;
+      padding: 1.25rem 0.85rem;
+      z-index: 50;
+    }
+
+    .sidebar-section-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      padding: 0.75rem 0.6rem 0.35rem;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      padding: 0.45rem 0.65rem;
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      font-size: 0.86rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.15s ease;
+    }
+
+    .sidebar-link:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-main);
+      text-decoration: none;
+      transform: translateX(3px);
+    }
+
+    .sidebar-link.active {
+      background: rgba(var(--primary-rgb), 0.12);
+      color: var(--primary);
+      font-weight: 600;
+      border-left: 3px solid var(--primary);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .nav-badge {
+      font-size: 0.68rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: 10px;
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      color: var(--text-dim);
+    }
+
+    .sidebar-footer {
+      margin-top: 1.5rem;
+      padding: 0.9rem;
+      border-radius: var(--radius);
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-color);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .system-status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      color: var(--success);
+      margin-bottom: 0.3rem;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 8px var(--success);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ==========================================================================
+       CONTENIDO PRINCIPAL
+       ========================================================================== */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 2rem 2.5rem 5rem;
+      max-width: 1200px;
+    }
+
+    /* HERO BANNER */
+    .hero-banner {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.15) 0%, rgba(99, 102, 241, 0.08) 100%), var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-banner::after {
+      content: "";
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .badge-primary { background: rgba(var(--primary-rgb), 0.15); color: var(--primary); border: 1px solid rgba(var(--primary-rgb), 0.3); }
+    .badge-success { background: var(--success-bg); color: var(--success); border: 1px solid var(--success-border); }
+    .badge-warning { background: var(--warning-bg); color: var(--warning); border: 1px solid var(--warning-border); }
+    .badge-danger  { background: var(--danger-bg);  color: var(--danger);  border: 1px solid var(--danger-border); }
+    .badge-info    { background: var(--info-bg);    color: var(--info);    border: 1px solid var(--info-border); }
+
+    .hero-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-description {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 850px;
+      line-height: 1.5;
+    }
+
+    /* BARRA DE ACCIÓN RÁPIDA */
+    .quick-actions-bar {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1.25rem;
+    }
+
+    /* SECCIONES Y TARJETAS */
+    .section-container {
+      margin-bottom: 2.75rem;
+      scroll-margin-top: calc(var(--header-height) + 1.5rem);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header-icon {
+      color: var(--primary);
+    }
+
+    /* GRID DE ÁREAS (INTRO) */
+    .areas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .area-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem 1.15rem;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .area-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+    }
+
+    .area-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .area-card-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .area-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* COMPONENTE DETAILS / SUMMARY PROFESIONAL */
+    details.tech-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      scroll-margin-top: calc(var(--header-height) + 1.5rem);
+    }
+
+    details.tech-card:hover {
+      border-color: rgba(var(--primary-rgb), 0.4);
+    }
+
+    details.tech-card[open] {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    summary.tech-card-header {
+      list-style: none;
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      background: var(--bg-card);
+      transition: background-color 0.15s ease;
+    }
+
+    summary.tech-card-header::-webkit-details-marker {
+      display: none;
+    }
+
+    summary.tech-card-header:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .summary-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .chevron-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--text-muted);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+    }
+
+    details.tech-card[open] > summary .chevron-icon {
+      transform: rotate(90deg);
+      color: var(--primary);
+    }
+
+    .tech-card-body {
+      padding: 1.25rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-card-alt);
+    }
+
+    /* STEP-BY-STEP (LISTA DE PASOS NUMERADA) */
+    .step-list {
+      list-style: none;
+      counter-reset: step-counter;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin: 1rem 0;
+    }
+
+    .step-item {
+      position: relative;
+      padding-left: 2.85rem;
+      counter-increment: step-counter;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    .step-item::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: -1px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(var(--primary-rgb), 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.78rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-mono);
+    }
+
+    /* CAJAS DE ALERTA Y LLAMADAS DE ATENCIÓN (CALLOUTS) */
+    .callout {
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius);
+      margin: 1rem 0;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .callout-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+    }
+
+    .callout-warning {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: #fde68a;
+    }
+    [data-theme="light"] .callout-warning { color: #92400e; }
+    .callout-warning .callout-icon { color: var(--warning); }
+
+    .callout-danger {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      color: #fca5a5;
+    }
+    [data-theme="light"] .callout-danger { color: #991b1b; }
+    .callout-danger .callout-icon { color: var(--danger); }
+
+    .callout-tip {
+      background: var(--info-bg);
+      border: 1px solid var(--info-border);
+      color: #93c5fd;
+    }
+    [data-theme="light"] .callout-tip { color: #1e40af; }
+    .callout-tip .callout-icon { color: var(--info); }
+
+    .callout-success {
+      background: var(--success-bg);
+      border: 1px solid var(--success-border);
+      color: #6ee7b7;
+    }
+    [data-theme="light"] .callout-success { color: #065f46; }
+    .callout-success .callout-icon { color: var(--success); }
+
+    /* ==========================================================================
+       ESQUEMAS TÉCNICOS VECTORIALES (SVG SCHEMATICS EN VEZ DE IMÁGENES)
+       ========================================================================== */
+    .schematic-wrapper {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin: 1.25rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .schematic-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.6rem;
+    }
+
+    .schematic-title {
+      font-size: 0.92rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .schematic-svg-container {
+      width: 100%;
+      max-width: 650px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .schematic-svg-container svg {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .patterns-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .touch-target-sim {
+      cursor: pointer;
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .touch-target-sim:hover {
+      filter: brightness(1.3);
+    }
+    .touch-target-sim:active {
+      transform: scale(0.95);
+    }
+
+    /* HARDWARE PORTS COMPARISON */
+    .ports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .port-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .port-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .port-badge {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .port-com3 { background: #3b82f6; color: #fff; }
+    .port-com4 { background: #8b5cf6; color: #fff; }
+    .port-lan  { background: #10b981; color: #fff; }
+    .port-usb  { background: #f59e0b; color: #fff; }
+
+    /* TABLA TÉCNICA */
+    .tech-table-wrapper {
+      overflow-x: auto;
+      margin: 1rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+    }
+
+    .tech-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    .tech-table th {
+      background: var(--bg-card-alt);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    .tech-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .tech-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tech-table tr:hover td {
+      background: var(--bg-card-hover);
+    }
+
+    /* DOWNLOAD CARDS */
+    .download-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      margin-bottom: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .download-card:hover {
+      border-color: var(--primary);
+      background: var(--bg-card-hover);
+    }
+
+    .download-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .download-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius);
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .download-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    .download-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* INTERACTIVE SIMULATOR COUNTER */
+    .sim-bar {
+      margin-top: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-card-alt);
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius);
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+    }
+
+    /* SCROLL TO TOP */
+    .btn-scroll-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-lg);
+      z-index: 90;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-scroll-top:hover {
+      transform: translateY(-3px);
+    }
+
+    /* ==========================================================================
+       RESPONSIVE & IMPRESIÓN (PRINT STYLES)
+       ========================================================================== */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 20px 0 30px rgba(0, 0, 0, 0.5);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 1.5rem 1.25rem 4rem;
+      }
+      .btn-mobile-toggle {
+        display: inline-flex;
+      }
+      .search-box input {
+        width: 140px;
+      }
+      .search-box input:focus {
+        width: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .brand-subtitle, .search-box {
+        display: none;
+      }
+      .hero-title {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 11pt;
+      }
+      .topbar, .sidebar, .quick-actions-bar, .btn-scroll-top, .sim-bar, .search-box {
+        display: none !important;
+      }
+      .main-content {
+        margin-left: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .hero-banner {
+        border: 1px solid #ccc !important;
+        background: #f4f4f4 !important;
+        color: #000 !important;
+      }
+      .hero-title, .section-header h2 {
+        color: #000 !important;
+      }
+      details.tech-card {
+        border: 1px solid #bbb !important;
+        background: #fff !important;
+        page-break-inside: avoid;
+        margin-bottom: 12pt;
+      }
+      details.tech-card[open] {
+        box-shadow: none !important;
+      }
+      summary.tech-card-header {
+        background: #eee !important;
+        color: #000 !important;
+      }
+      .tech-card-body {
+        display: block !important;
+        background: #fff !important;
+      }
+      .chevron-icon {
+        display: none;
+      }
+      .section-container {
+        page-break-before: auto;
+      }
+      a {
+        color: #000 !important;
+        text-decoration: underline;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABECERA SUPERIOR FIJA -->
+  <header class="topbar">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <button class="btn-icon btn-mobile-toggle" id="btnSidebarToggle" aria-label="Abrir Menú">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <a href="#" class="brand">
+        <div class="brand-icon">W</div>
+        <div class="brand-title">
+          <span>SOPORTE TÉCNICO DE SALA</span>
+          <span class="brand-subtitle">Manual de Operaciones & E-Box</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="topbar-controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Buscar falla o código..." autocomplete="off">
+      </div>
+
+      <button class="btn-icon" id="btnToggleAll" title="Expandir o contraer todas las tarjetas">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="7 13 12 18 17 13"></polyline><polyline points="7 6 12 11 17 6"></polyline></svg>
+        <span id="txtToggleAll">Desplegar</span>
+      </button>
+
+      <button class="btn-icon" id="btnPrint" title="Imprimir manual o guardar en PDF">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        <span>Imprimir</span>
+      </button>
+
+      <button class="btn-icon" id="btnThemeToggle" title="Cambiar tema Claro / Oscuro">
+        <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="app-container">
+
+    <!-- MENÚ LATERAL DINÁMICO (SIDEBAR) -->
+    <aside class="sidebar" id="sidebarNav">
+      <div class="sidebar-section-title">
+        <span>Navegación Rápida</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#introduccion" class="sidebar-link active"><span style="display:flex;align-items:center;gap:0.5rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg> Introducción</span></a></li>
+        <li><a href="#saldos" class="sidebar-link"><span style="display:flex;align-items:center;gap:0.5rem;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Saldos (Tarjeta en 0)</span> <span class="nav-badge">3 casos</span></a></li>
+      </ul>
+
+      <div class="sidebar-section-title">
+        <span>Módulo E-Box / WIGOS</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#sas" class="sidebar-link"><span>• Error Conexión SAS</span> <span class="nav-badge">COM3/4</span></a></li>
+        <li><a href="#centro" class="sidebar-link"><span>• Error Conexión Centro</span> <span class="nav-badge">LAN</span></a></li>
+        <li><a href="#reservado" class="sidebar-link"><span>• E-Box Reservado</span></a></li>
+        <li><a href="#menuEbox" class="sidebar-link"><span>• Entrar al Menú (Patrones)</span> <span class="nav-badge">Táctil</span></a></li>
+        <li><a href="#calibrarDisplay" class="sidebar-link"><span>• Calibración de Display</span></a></li>
+        <li><a href="#clonar" class="sidebar-link"><span>• Clonado de Disco</span> <span class="nav-badge">WIGOS</span></a></li>
+        <li><a href="#configurarEbox" class="sidebar-link"><span>• Configuración Post-Instalación</span></a></li>
+        <li><a href="#reiniciarEbox" class="sidebar-link"><span>• Ciclo de Reinicio Hardware</span></a></li>
+      </ul>
+
+      <div class="sidebar-section-title">
+        <span>Periféricos de Terminal</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#tarjetero" class="sidebar-link"><span>• Tarjetero & Tipos</span> <span class="nav-badge">Magtek/XST</span></a></li>
+        <li><a href="#tarjetaOcupada" class="sidebar-link"><span>• Tarjeta Bloqueada / Jackpot</span></a></li>
+        <li><a href="#toper" class="sidebar-link"><span>• Topper / TV-Box</span></a></li>
+        <li><a href="#scaner" class="sidebar-link"><span>• Scanner & Calibración</span></a></li>
+        <li><a href="#perifericos-adicionales" class="sidebar-link"><span>• Audio, Video, Botoneras</span></a></li>
+      </ul>
+
+      <div class="sidebar-section-title">
+        <span>Gabinete & Gestión</span>
+      </div>
+      <ul class="sidebar-nav">
+        <li><a href="#maquinas" class="sidebar-link"><span>• Fabricantes de Máquinas</span></a></li>
+        <li><a href="#proveedores-archivos" class="sidebar-link"><span>• Contactos & Formatos</span></a></li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="system-status-indicator">
+          <span class="status-dot"></span>
+          <span>SISTEMA WIGOS v5.5</span>
+        </div>
+        <p>Documentación técnica de operaciones para soporte en sala.</p>
+      </div>
+    </aside>
+
+    <!-- ÁREA DE CONTENIDO -->
+    <main class="main-content">
+
+      <!-- BANNER DE BIENVENIDA -->
+      <section class="hero-banner" id="introduccion">
+        <div class="hero-meta">
+          <span class="badge badge-primary">Manual Operativo v2.4</span>
+          <span class="badge badge-success">Casino Floor Ready</span>
+          <span class="badge badge-info">WIGOS Platform</span>
+        </div>
+        <h1 class="hero-title">Manual Técnico de Operaciones y Terminales</h1>
+        <p class="hero-description">
+          Guía estandarizada paso a paso para el personal técnico y de operaciones. Diseñada para la resolución rápida de incidencias comunes en terminales de juego, controladores E-Box, periféricos de validación y comunicaciones de sala.
+        </p>
+
+        <div class="quick-actions-bar">
+          <a href="#menuEbox" class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Ver Patrones de Menú E-Box</span>
+          </a>
+          <a href="#saldos" class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="18" x2="12" y2="20"></line><line x1="12" y1="4" x2="12" y2="6"></line></svg>
+            <span>Protocolo Tarjeta en 0</span>
+          </a>
+          <a href="#proveedores-archivos" class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Descargar Formatos / Proveedores</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- CATÁLOGO DE ÁREAS TÉCNICAS -->
+      <section class="section-container">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Matriz de Especialidades Técnicas
+          </h2>
+          <span style="font-size:0.8rem;color:var(--text-muted);">Acceso directo a procedimientos</span>
+        </div>
+
+        <div class="areas-grid">
+          <a href="#saldos" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Gestión de Saldos
+              </span>
+              <span class="badge badge-danger">Crítico</span>
+            </div>
+            <p class="area-card-desc">Tarjetas en 0, balance no transferido entre máquina y E-Box, pagos manuales.</p>
+          </a>
+
+          <a href="#ebox" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                Controladores E-Box
+              </span>
+              <span class="badge badge-primary">WIGOS</span>
+            </div>
+            <p class="area-card-desc">Conexión SAS COM3/COM4, red centro LAN, display touch, clonación y booteo.</p>
+          </a>
+
+          <a href="#tarjetero" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+                Lectores de Tarjetas
+              </span>
+              <span class="badge badge-warning">Hardware</span>
+            </div>
+            <p class="area-card-desc">Magtek vs XST, tarjetas bloqueadas, jugadas pendientes y jackpot key.</p>
+          </a>
+
+          <a href="#toper" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                Topper / TV-Box
+              </span>
+              <span class="badge badge-info">Video</span>
+            </div>
+            <p class="area-card-desc">Ciclo de energía, señal HDMI, recuperación de menú congelado.</p>
+          </a>
+
+          <a href="#scaner" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 7 23 1 17 1"></polyline><line x1="16" y1="8" x2="23" y2="1"></line><polyline points="1 17 1 23 7 23"></polyline><line x1="8" y1="16" x2="1" y2="23"></line></svg>
+                Scanners & Sensores
+              </span>
+              <span class="badge badge-info">Calibración</span>
+            </div>
+            <p class="area-card-desc">Asistente de calibración, hoja patrón, explorer task manager.</p>
+          </a>
+
+          <a href="#maquinas" class="area-card">
+            <div class="area-card-header">
+              <span class="area-card-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="12 6 12 12 16 14"></polygon></svg>
+                Gabinetes de Juego
+              </span>
+              <span class="badge badge-primary">Fabricantes</span>
+            </div>
+            <p class="area-card-desc">Zitro, IGT, AGS, Ortiz, EGT, botoneras, impresoras TITO y monitores.</p>
+          </a>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: SALDOS -->
+      <section class="section-container" id="saldos">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            Protocolo de Incidencia: Tarjeta en 0
+          </h2>
+          <span class="badge badge-danger">Atención Prioritaria</span>
+        </div>
+
+        <details class="tech-card" open>
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              <span>Diagnóstico y Recuperación de Saldo</span>
+            </div>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p style="margin-bottom: 1rem;">
+              Cuando un cliente reporta que su tarjeta quedó en <code>$0.00</code> al retirarla o insertarla, existen <strong>tres escenarios operacionales</strong>. Siga este flujo sistemático para identificar la causa raíz:
+            </p>
+
+            <!-- DIAGRAMA VISUAL VECTORIAL DE DECISIÓN -->
+            <div class="schematic-wrapper">
+              <div class="schematic-header">
+                <span class="schematic-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  Árbol de Decisión Rápida: Tarjeta con Saldo Cero
+                </span>
+                <span class="badge badge-info">Flujograma Operativo</span>
+              </div>
+              <div class="schematic-svg-container" style="max-width: 580px;">
+                <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" style="background:#0a0e17;border:1px solid #1e293b;">
+                  <!-- Nodo Inicial -->
+                  <rect x="200" y="15" width="200" height="45" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                  <text x="300" y="42" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">Revisar Pantalla de la Máquina</text>
+                  
+                  <!-- Flecha bifurcación -->
+                  <line x1="300" y1="60" x2="300" y2="90" stroke="#64748b" stroke-width="2"/>
+                  
+                  <!-- Decisión -->
+                  <polygon points="300,90 420,135 300,180 180,135" fill="#161f30" stroke="#f59e0b" stroke-width="2"/>
+                  <text x="300" y="130" fill="#f8fafc" font-size="11" font-weight="600" text-anchor="middle" font-family="sans-serif">¿Aparecen créditos</text>
+                  <text x="300" y="146" fill="#f8fafc" font-size="11" font-weight="600" text-anchor="middle" font-family="sans-serif">en el juego?</text>
+                  
+                  <!-- Rama SÍ -->
+                  <line x1="420" y1="135" x2="490" y2="135" stroke="#34d399" stroke-width="2"/>
+                  <line x1="490" y1="135" x2="490" y2="210" stroke="#34d399" stroke-width="2"/>
+                  <text x="445" y="125" fill="#34d399" font-size="11" font-weight="700" font-family="sans-serif">SÍ (En juego)</text>
+                  <rect x="390" y="210" width="200" height="85" rx="6" fill="#0d1f1d" stroke="#10b981" stroke-width="1.5"/>
+                  <text x="490" y="235" fill="#34d399" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">E-Box no transfirió</text>
+                  <text x="490" y="255" fill="#e2e8f0" font-size="11" text-anchor="middle" font-family="sans-serif">Acción: Reiniciar E-Box</text>
+                  <text x="490" y="275" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="sans-serif">(Esperar ciclo 10s apagado)</text>
+                  
+                  <!-- Rama NO -->
+                  <line x1="180" y1="135" x2="110" y2="135" stroke="#f87171" stroke-width="2"/>
+                  <line x1="110" y1="135" x2="110" y2="210" stroke="#f87171" stroke-width="2"/>
+                  <text x="125" y="125" fill="#f87171" font-size="11" font-weight="700" font-family="sans-serif">NO ($0.00)</text>
+                  <rect x="10" y="210" width="200" height="85" rx="6" fill="#1f1318" stroke="#ef4444" stroke-width="1.5"/>
+                  <text x="110" y="235" fill="#f87171" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">Máquina no liberó</text>
+                  <text x="110" y="255" fill="#e2e8f0" font-size="11" text-anchor="middle" font-family="sans-serif">Acción: Reiniciar Máquina</text>
+                  <text x="110" y="275" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="sans-serif">Reintentar ciclo 2 veces</text>
+                  
+                  <!-- Rama Escalamiento -->
+                  <rect x="220" y="225" width="160" height="55" rx="6" fill="#1c1917" stroke="#f59e0b" stroke-width="1.5"/>
+                  <text x="300" y="247" fill="#fbbf24" font-size="11" font-weight="700" text-anchor="middle" font-family="sans-serif">Si persiste el fallo:</text>
+                  <text x="300" y="265" fill="#f8fafc" font-size="11" text-anchor="middle" font-family="sans-serif">Proceder a Pago Manual</text>
+                </svg>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem;">
+              <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;">
+                <h4 style="color:var(--primary);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem;">
+                  <span>1. Saldo no liberado por el juego (Créditos presentes en pantalla de la máquina)</span>
+                </h4>
+                <p style="font-size:0.9rem;color:var(--text-muted);">
+                  Si en los contadores del juego se aprecian los créditos pero la tarjeta marca cero, la comunicación SAS quedó suspendida.
+                  <strong>Solución:</strong> Apagar y reiniciar la máquina de juego desde el interruptor principal del chasis inferior. Al inicializar, la terminal devolverá el saldo al servidor WIGOS.
+                </p>
+              </div>
+
+              <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;">
+                <h4 style="color:var(--primary);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem;">
+                  <span>2. Saldo no liberado por el controlador E-Box</span>
+                </h4>
+                <p style="font-size:0.9rem;color:var(--text-muted);">
+                  Si el juego está en reposo y el lector no registra la transacción hacia el servidor central.
+                  <strong>Solución:</strong> Ejecutar el <a href="#reiniciarEbox">Reinicio de Hardware del E-Box</a> apagándolo, aguardando 10 segundos para descargar condensadores y volviendo a encender.
+                </p>
+              </div>
+
+              <div style="background:var(--bg-card);border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;">
+                <h4 style="color:var(--warning);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem;">
+                  <span>3. Saldo no recuperado tras reintentos (Saldo en limbo / Pago Manual)</span>
+                </h4>
+                <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:0.5rem;">
+                  Si tras ejecutar al menos dos ciclos de reinicio completos el saldo continúa sin reflejarse en la tarjeta del cliente:
+                </p>
+                <div class="callout callout-warning">
+                  <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                  <div>
+                    <strong>Protocolo de Pago Manual:</strong> Levantar ticket de soporte con el número de máquina, hora exacta y tarjeta del cliente. Proceder con el formato de pago manual autorizado por gerencia/supervisión y notificar al proveedor si la terminal presenta bloqueo de contadores SAS.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+      </section>
+
+      <!-- SECCIÓN: MÓDULO E-BOX -->
+      <section class="section-container" id="ebox">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+            Controlador E-Box (Plataforma WIGOS)
+          </h2>
+          <span class="badge badge-primary">Sistema Central</span>
+        </div>
+
+        <!-- ESQUEMA DE PUERTOS DE HARDWARE -->
+        <div class="schematic-wrapper">
+          <div class="schematic-header">
+            <span class="schematic-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+              Mapa de Conectividad Trasera: E-Box Estándar vs E-Box Nano
+            </span>
+            <span class="badge badge-warning">Verificación Física</span>
+          </div>
+
+          <div class="ports-grid">
+            <div class="port-box">
+              <div class="port-box-header">
+                <span>Puerto SAS (Comunicación Máquina)</span>
+                <span class="port-badge port-com3">COM3 / COM4</span>
+              </div>
+              <p style="font-size:0.82rem;color:var(--text-muted);">
+                • <strong>E-Box Estándar:</strong> Conectar siempre a <code>COM3</code>.<br>
+                • <strong>E-Box Nano (Chasis Negro):</strong> Conectar a <code>COM4</code>.<br>
+                Verificar que el cable serial DB9 esté atornillado firmemente.
+              </p>
+            </div>
+
+            <div class="port-box">
+              <div class="port-box-header">
+                <span>Conexión de Red (Centro WIGOS)</span>
+                <span class="port-badge port-lan">LAN RJ-45</span>
+              </div>
+              <p style="font-size:0.82rem;color:var(--text-muted);">
+                • Enlace directo con el servidor central de sala.<br>
+                • Verificar link LED verde/ámbar en el conector.<br>
+                • Rastreo hacia switches de isla si no hay enlace.
+              </p>
+            </div>
+
+            <div class="port-box">
+              <div class="port-box-header">
+                <span>Periféricos USB</span>
+                <span class="port-badge port-usb">USB 2.0 / 3.0</span>
+              </div>
+              <p style="font-size:0.82rem;color:var(--text-muted);">
+                • Conexión de lector de tarjetas (Magtek/XST).<br>
+                • Controlador del panel táctil del display.<br>
+                • Teclado y USB booteable para clonación.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUB-ITEM: CONEXIÓN SAS -->
+        <details class="tech-card" id="sas" open>
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+              <span>Falla de Conexión SAS</span>
+            </div>
+            <span class="badge badge-danger">Falla de Comunicación</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>La conexión SAS (Slot Accounting System) es el enlace de comunicación serial entre el gabinete de juego y el controlador WIGOS:</p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Identificación del Puerto Serial:</strong>
+                En los E-Box convencionales el arnés SAS se inserta en el puerto <code>COM3</code>. En los modelos <strong>E-Box Nano</strong> (identificables por su gabinete totalmente negro y compacto), se conecta obligatoriamente en el puerto <code>COM4</code>.
+              </li>
+              <li class="step-item">
+                <strong>Inspección Mecánica:</strong>
+                Comprobar que el conector DB9 esté asegurado y sin pines doblados o flojos. Revisar que la manguera de cable no esté mordida por la puerta del gabinete.
+              </li>
+              <li class="step-item">
+                <strong>Reinicio Secuencial:</strong>
+                Si la conexión física es correcta y la alerta persiste en el display, reiniciar el E-Box. Si no recupera sincronía, reiniciar la máquina de juego para restablecer el canal SAS.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: ERROR CONEXIÓN CENTRO -->
+        <details class="tech-card" id="centro">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              <span>Error de Conexión Centro (Red LAN)</span>
+            </div>
+            <span class="badge badge-warning">Red / Servidor</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Esta falla indica pérdida de paquetes o desconexión total entre el E-Box y el servidor central de sala:</p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Prueba de Patch Cord:</strong>
+                Desconectar el cable de red RJ-45 del puerto LAN del E-Box, esperar 3 segundos y volver a presionar hasta escuchar el click de seguridad.
+              </li>
+              <li class="step-item">
+                <strong>Inspección de Luces Link/Act:</strong>
+                Observar los LEDs del conector de red. Debe haber un led fijo (link) y otro parpadeando (actividad). Si no enciende ninguno, hay corte de señal física.
+              </li>
+              <li class="step-item">
+                <strong>Rastreo a Switch de Banco/Isla:</strong>
+                Seguir el cableado por la canaleta interior hacia el switch de red del banco de máquinas. Comprobar que el puerto asignado en el switch esté encendido. Probar con un puerto libre o reemplazar el patch cord.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: E-BOX RESERVADO -->
+        <details class="tech-card" id="reservado">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>E-Box en Estado "Reservado"</span>
+            </div>
+            <span class="badge badge-info">Operativo</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Ocurre cuando un jugador activa la función de reserva en la pantalla de la terminal:</p>
+            <div class="callout callout-tip">
+              <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+              <div>
+                <strong>Métodos de Desbloqueo:</strong><br>
+                1. <strong>Inmediato:</strong> Insertar la misma tarjeta de cliente que generó la reserva.<br>
+                2. <strong>Por Tiempo (Timeout):</strong> Aguardar <strong>15 minutos</strong> continuos. El sistema WIGOS liberará la máquina automáticamente devolviéndola al estado disponible.<br>
+                3. <strong>Forzado:</strong> Si se requiere liberar con urgencia para piso de juego, realizar un reinicio físico del E-Box.
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: ENTRAR AL MENÚ E-BOX (PATRONES REEMPLAZADOS CON VECTOR SVG) -->
+        <details class="tech-card" id="menuEbox" open>
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+              <span>Acceso al Menú de Servicio del E-Box (Patrones Táctiles)</span>
+            </div>
+            <span class="badge badge-primary">Esquema Interactivo</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>
+              Para acceder al menú de diagnóstico y configuración interna del E-Box, se debe presionar la pantalla táctil de manera rítmica y continua.
+            </p>
+            <div class="callout callout-tip">
+              <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              <div>
+                <strong>Principio Operativo:</strong> No importa estrictamente el orden de los toques, sino la <strong>frecuencia rápida y cadencia constante</strong> de las pulsaciones sobre las zonas de activación.
+              </div>
+            </div>
+
+            <!-- COMPARATIVA VISUAL DE LOS DOS PATRONES VECTORIALES (REEMPLAZA LAS FOTOS PERDIDAS) -->
+            <div class="patterns-grid">
+
+              <!-- PATRÓN 1: 4 CUADRANTES LATERAL DERECHO -->
+              <div class="schematic-wrapper" style="margin:0;">
+                <div class="schematic-header">
+                  <span class="schematic-title">
+                    <span class="port-badge port-com3">PATRÓN 1</span>
+                    Cuadrante Lateral Derecho (4 Puntos)
+                  </span>
+                </div>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;">
+                  Pulsar rápidamente entre los 4 sectores del lado derecho de la pantalla (donde aparece el QR de WIGOS).
+                </p>
+
+                <div class="schematic-svg-container">
+                  <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Bisel exterior display -->
+                    <rect x="10" y="10" width="780" height="440" rx="16" fill="#1b0005" stroke="#7f1d1d" stroke-width="6"/>
+                    <!-- Marco metálico interior -->
+                    <rect x="35" y="35" width="730" height="390" rx="10" fill="#031628" stroke="#1e3a8a" stroke-width="3"/>
+                    
+                    <!-- Pantalla LCD fondo degradado WIGOS -->
+                    <defs>
+                      <linearGradient id="bgWigos1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0284c7"/>
+                        <stop offset="40%" stop-color="#0369a1"/>
+                        <stop offset="100%" stop-color="#1e1b4b"/>
+                      </linearGradient>
+                      <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#4338ca"/>
+                        <stop offset="100%" stop-color="#312e81"/>
+                      </linearGradient>
+                    </defs>
+                    <rect x="45" y="45" width="710" height="370" rx="6" fill="url(#bgWigos1)"/>
+                    
+                    <!-- Tarjeta central "Bienvenido" -->
+                    <rect x="70" y="100" width="420" height="250" rx="20" fill="url(#cardGrad)" opacity="0.9" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                    <!-- Icono ranura de tarjeta -->
+                    <circle cx="160" cy="225" r="50" fill="#6366f1" opacity="0.4"/>
+                    <rect x="125" y="195" width="70" height="55" rx="6" fill="#a5b4fc" transform="rotate(-15 160 225)"/>
+                    <rect x="135" y="210" width="50" height="8" rx="2" fill="#312e81" transform="rotate(-15 160 225)"/>
+                    
+                    <text x="240" y="200" fill="#ffffff" font-size="22" font-weight="800" font-family="sans-serif">Bienvenido</text>
+                    <text x="240" y="240" fill="#cbd5e1" font-size="16" font-weight="500" font-family="sans-serif">Inserte la tarjeta</text>
+                    
+                    <!-- Banderas / Idioma -->
+                    <circle cx="430" cy="80" r="14" fill="#38bdf8"/>
+                    <circle cx="470" cy="80" r="14" fill="#10b981"/>
+
+                    <!-- Logo y watermark WIGOS -->
+                    <text x="640" y="390" fill="#38bdf8" font-size="20" font-weight="800" font-family="sans-serif" letter-spacing="2">WIGOS</text>
+                    
+                    <!-- Mini QR Code decorativo -->
+                    <rect x="540" y="70" width="80" height="80" rx="6" fill="#ffffff"/>
+                    <rect x="550" y="80" width="25" height="25" fill="#000"/>
+                    <rect x="585" y="80" width="25" height="25" fill="#000"/>
+                    <rect x="550" y="115" width="25" height="25" fill="#000"/>
+                    <rect x="585" y="115" width="10" height="10" fill="#000"/>
+
+                    <!-- ZONAS DE TOQUE 1, 2, 3, 4 (SIMULADAS) -->
+                    <!-- Zona 1 -->
+                    <g class="touch-target-sim" onclick="window.simTouch(1)">
+                      <rect x="515" y="170" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="567" y="235" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">1</text>
+                    </g>
+                    <!-- Zona 2 -->
+                    <g class="touch-target-sim" onclick="window.simTouch(2)">
+                      <rect x="635" y="170" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="687" y="235" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">2</text>
+                    </g>
+                    <!-- Zona 3 -->
+                    <g class="touch-target-sim" onclick="window.simTouch(3)">
+                      <rect x="515" y="285" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="567" y="350" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">3</text>
+                    </g>
+                    <!-- Zona 4 -->
+                    <g class="touch-target-sim" onclick="window.simTouch(4)">
+                      <rect x="635" y="285" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="687" y="350" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">4</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- PATRÓN 2: DIAGONAL ALTERNADO -->
+              <div class="schematic-wrapper" style="margin:0;">
+                <div class="schematic-header">
+                  <span class="schematic-title">
+                    <span class="port-badge port-com4">PATRÓN 2</span>
+                    Diagonal Alternada (3 Puntos)
+                  </span>
+                </div>
+                <p style="font-size:0.8rem;color:var(--text-muted);margin-bottom:0.75rem;">
+                  Pulsar alternadamente entre el lateral izquierdo (1, 2) y el extremo derecho (3).
+                </p>
+
+                <div class="schematic-svg-container">
+                  <svg viewBox="0 0 800 460" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="10" y="10" width="780" height="440" rx="16" fill="#1b0005" stroke="#7f1d1d" stroke-width="6"/>
+                    <rect x="35" y="35" width="730" height="390" rx="10" fill="#031628" stroke="#1e3a8a" stroke-width="3"/>
+                    
+                    <rect x="45" y="45" width="710" height="370" rx="6" fill="url(#bgWigos1)"/>
+                    
+                    <!-- Tarjeta central -->
+                    <rect x="180" y="100" width="420" height="250" rx="20" fill="url(#cardGrad)" opacity="0.9" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                    <circle cx="260" cy="225" r="45" fill="#6366f1" opacity="0.4"/>
+                    <rect x="235" y="200" width="60" height="45" rx="5" fill="#a5b4fc" transform="rotate(-15 260 225)"/>
+                    <text x="330" y="205" fill="#ffffff" font-size="22" font-weight="800" font-family="sans-serif">Bienvenido</text>
+                    <text x="330" y="240" fill="#cbd5e1" font-size="16" font-weight="500" font-family="sans-serif">Inserte la tarjeta</text>
+
+                    <!-- Watermark WIGOS -->
+                    <text x="590" y="390" fill="#38bdf8" font-size="20" font-weight="800" font-family="sans-serif" letter-spacing="2">WIGOS</text>
+
+                    <!-- ZONAS DE TOQUE PATRÓN 2 -->
+                    <!-- Zona 1 (Arriba Izquierda) -->
+                    <g class="touch-target-sim" onclick="window.simTouch(1)">
+                      <rect x="55" y="170" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="107" y="235" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">1</text>
+                    </g>
+                    <!-- Zona 2 (Abajo Izquierda) -->
+                    <g class="touch-target-sim" onclick="window.simTouch(2)">
+                      <rect x="55" y="285" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="107" y="350" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">2</text>
+                    </g>
+                    <!-- Zona 3 (Derecha Centro) -->
+                    <g class="touch-target-sim" onclick="window.simTouch(3)">
+                      <rect x="635" y="215" width="105" height="95" rx="18" fill="#ffffff" filter="drop-shadow(0 4px 10px rgba(0,0,0,0.5))"/>
+                      <text x="687" y="280" fill="#0f172a" font-size="52" font-weight="900" font-family="sans-serif" text-anchor="middle">3</text>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- SIMULADOR INTERACTIVO DE TOQUES -->
+            <div class="sim-bar">
+              <span id="simStatus">Simulador táctil: Haga clic rápidamente en los números del diagrama.</span>
+              <span id="simCounter" style="color:var(--primary);font-weight:700;">Toques: 0</span>
+            </div>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: CALIBRACIÓN DISPLAY -->
+        <details class="tech-card" id="calibrarDisplay">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v4"></path><path d="M12 17v4"></path><path d="M3 12h4"></path><path d="M17 12h4"></path></svg>
+              <span>Calibración de Display Táctil (Pantalla Desfasada)</span>
+            </div>
+            <span class="badge badge-warning">Procedimiento Técnico</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>
+              Si el touch no responde en la posición adecuada y no permite presionar los botones del menú, siga esta técnica con pantalla auxiliar calibrada:
+            </p>
+            <ol class="step-list">
+              <li class="step-item">
+                <strong>Apertura de Gabinete:</strong> Abrir la puerta principal de la terminal con su respectiva llave de técnico.
+              </li>
+              <li class="step-item">
+                <strong>Desconexión del Touchscreen:</strong> Localizar el cable flexible/USB proveniente de la parte trasera del display del E-Box y desconectarlo del controlador.
+              </li>
+              <li class="step-item">
+                <strong>Conexión de Display Calibrado:</strong> Solicitar en bodega de refacciones un display auxiliar funcional y calibrado. Conectarlo temporalmente al puerto del E-Box.
+              </li>
+              <li class="step-item">
+                <strong>Acceso al Menú:</strong> Mediante el display auxiliar, <a href="#menuEbox">ingresar al menú de servicio del E-Box</a> usando los toques rítmicos.
+              </li>
+              <li class="step-item">
+                <strong>Módulo Display:</strong> En la interfaz, presionar el recuadro naranja rotulado como <code>Display</code>.
+              </li>
+              <li class="step-item">
+                <strong>Disparar Calibración:</strong> Pulsar el icono circular con esquinas delimitadas y punto central (blanco de calibración).
+              </li>
+              <li class="step-item">
+                <strong>Reconexión del Display Original:</strong> Sin salir de la pantalla de calibración, desconectar el display auxiliar y reconectar el cable del display original de la máquina.
+              </li>
+              <li class="step-item">
+                <strong>Completar Puntos en Cruz:</strong> Tocar con precisión las cruces de los 4 extremos en la pantalla original siguiendo las indicaciones en pantalla y salir del menú para guardar los cambios.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: CLONADO DE DISCO -->
+        <details class="tech-card" id="clonar">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect><line x1="7" y1="2" x2="7" y2="22"></line><line x1="17" y1="2" x2="17" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="7" x2="7" y2="7"></line><line x1="2" y1="17" x2="7" y2="17"></line><line x1="17" y1="17" x2="22" y2="17"></line><line x1="17" y1="7" x2="22" y2="7"></line></svg>
+              <span>Clonado de Disco y Reinstalación de Imagen WIGOS</span>
+            </div>
+            <span class="badge badge-danger">Crítico</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <div class="callout callout-danger">
+              <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <div>
+                <strong>ADVERTENCIA EXCLUSIVA:</strong> ¡Los modelos <strong>E-Box Nano NO se clonan</strong> mediante este método! Solo aplica para E-Box estándar de formato completo.
+              </div>
+            </div>
+
+            <ol class="step-list">
+              <li class="step-item">
+                <strong>Requerimientos Previos:</strong>
+                Teclado USB estándar y memoria USB booteable con la imagen oficial de sistema WIGOS (solicitar memoria rotulada en oficina de Gerencia).
+              </li>
+              <li class="step-item">
+                <strong>Conexión en Frío:</strong>
+                Apagar el E-Box desde el botón de poder. Conectar tanto la USB booteable como el teclado en dos puertos USB libres.
+              </li>
+              <li class="step-item">
+                <strong>Arranque del Sistema:</strong>
+                Encender el equipo y permitir que el BIOS detecte automáticamente la memoria USB para inicializar el script de volcado.
+              </li>
+              <li class="step-item">
+                <strong>Confirmación de Sobrescritura:</strong>
+                Aparecerá una ventana de confirmación en pantalla. Confirmar con <kbd>Enter</kbd> / <kbd>Y</kbd> y esperar a que la barra de porcentaje complete la instalación (no interrumpir la energía).
+              </li>
+              <li class="step-item">
+                <strong>Paso Inmediato:</strong>
+                Una vez finalizado, retirar la memoria USB y continuar obligatoriamente con el proceso de <a href="#configurarEbox">Post-Instalación</a>.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: CONFIGURACIÓN POST-INSTALACIÓN -->
+        <details class="tech-card" id="configurarEbox">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              <span>Post-Instalación y Configuración del Sistema</span>
+            </div>
+            <span class="badge badge-success">Puesta en Marcha</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Al concluir la clonación, el E-Box debe configurarse con los parámetros específicos de hardware de la máquina:</p>
+            <ol class="step-list">
+              <li class="step-item">
+                <strong>Acceder al Menú:</strong> <a href="#menuEbox">Ingresar al menú de servicio del E-Box</a> mediante los toques de pantalla.
+              </li>
+              <li class="step-item">
+                <strong>Menú Configuración:</strong> Pulsar la opción <code>1) Configuración</code>.
+              </li>
+              <li class="step-item">
+                <strong>Seleccionar Lector de Tarjetas:</strong> Seleccionar la opción <code>2) Lector de tarjetas</code>:
+                <ul style="margin: 0.4rem 0 0.4rem 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+                  <li>Si el lector físico tiene un <strong>LED indicador al frente</strong> &rarr; Elegir <code>Magtek</code>.</li>
+                  <li>Si el lector frontal <strong>NO tiene LED</strong> &rarr; Elegir <code>XST</code>.</li>
+                </ul>
+              </li>
+              <li class="step-item">
+                <strong>Ajuste de Pantalla:</strong> Presionar <kbd>Esc</kbd> para regresar y seleccionar la opción <code>1) Display</code>.
+              </li>
+              <li class="step-item">
+                <strong>Driver Web:</strong> Navegar entre los perfiles hasta seleccionar <code>In touch web (5.5)</code> y presionar <kbd>Esc</kbd>.
+                <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.25rem;">
+                  <em>Nota: Si esta versión exacta no aparece de inmediato, seleccionar cualquier perfil "In touch web", reiniciar el E-Box y volver a ingresar para que se listen las opciones completas.</em>
+                </div>
+              </li>
+              <li class="step-item">
+                <strong>Reinicio para Guardar Cambios:</strong> Dirigirse a <code>4) Reiniciar</code> y confirmar con <code>2) Reiniciar E-Box</code>.
+              </li>
+            </ol>
+            <div class="callout callout-success">
+              <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              <div>El E-Box levantará con su interfaz web configurada, comunicando con el servidor y listo para transacciones.</div>
+            </div>
+          </div>
+        </details>
+
+        <!-- SUB-ITEM: REINICIAR E-BOX -->
+        <details class="tech-card" id="reiniciarEbox">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+              <span>Ciclo de Reinicio Físico (Hard Reset)</span>
+            </div>
+            <span class="badge badge-info">Hardware Reset</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Todos los controladores E-Box disponen de un pulsador físico de encendido y apagado en su chasis:</p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Apertura del Gabinete:</strong> Abrir la puerta frontal de la terminal para acceder al compartimiento interno del E-Box.
+              </li>
+              <li class="step-item">
+                <strong>Apagado:</strong> Presionar el botón de poder y esperar a que los ventiladores y LEDs internos se apaguen totalmente.
+              </li>
+              <li class="step-item">
+                <strong>Regla de los 10 Segundos:</strong> Contar <strong>10 segundos continuos</strong> antes de reencender. Esto descarga los filtros de alimentación y reinicia la memoria volátil del procesador.
+              </li>
+              <li class="step-item">
+                <strong>Encendido:</strong> Presionar nuevamente el botón y verificar que el display comience la secuencia de arranque de WIGOS.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+      </section>
+
+      <!-- SECCIÓN: PERIFÉRICOS -->
+      <section class="section-container" id="tarjetero">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+            Lectores de Tarjetas & Periféricos
+          </h2>
+          <span class="badge badge-warning">Validadores</span>
+        </div>
+
+        <!-- ERROR TARJETERO -->
+        <details class="tech-card" open>
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+              <span>Error de Lectura de Tarjetero / Fallo de Inserción</span>
+            </div>
+            <span class="badge badge-danger">Lect. Tarjetero Error</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Si la pantalla muestra "Error en tarjetero" o no detecta la banda magnética / chip:</p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Reconexión USB:</strong> Desconectar y volver a conectar el cable USB del tarjetero tanto desde el propio cuerpo del lector como desde el puerto USB del E-Box.
+              </li>
+              <li class="step-item">
+                <strong>Sustitución por Repuesto de Bodega:</strong>
+                En bodega de refacciones existe una caja identificada con la leyenda <strong>"Tarjeteros"</strong>. Retirar uno del mismo modelo (Magtek o XST) para reemplazarlo. Respetar el anclaje físico acorde al gabinete de juego.
+              </li>
+            </ul>
+
+            <!-- COMPARADOR VISUAL MAGTEK VS XST (VECTORIAL) -->
+            <div class="schematic-wrapper">
+              <div class="schematic-header">
+                <span class="schematic-title">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                  Identificación Rápida de Modelo de Tarjetero
+                </span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px,1fr));gap:1rem;">
+                <div style="border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;background:var(--bg-card);text-align:center;">
+                  <div style="font-weight:700;color:var(--primary);margin-bottom:0.5rem;">MODELO MAGTEK</div>
+                  <svg viewBox="0 0 200 90" width="100%" height="90" style="max-width:200px;margin:0 auto;display:block;">
+                    <rect x="10" y="10" width="180" height="70" rx="8" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                    <rect x="25" y="35" width="150" height="20" rx="3" fill="#0f172a"/>
+                    <!-- LED frontal verde brillante -->
+                    <circle cx="35" cy="22" r="5" fill="#10b981" filter="drop-shadow(0 0 4px #10b981)"/>
+                    <text x="50" y="25" fill="#94a3b8" font-size="9" font-family="sans-serif">LED INDICADOR</text>
+                  </svg>
+                  <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">
+                    Posee un <strong>LED frontal</strong> de estado en el bisel de inserción. Configurar como <code>Magtek</code> en el menú E-Box.
+                  </p>
+                </div>
+
+                <div style="border:1px solid var(--border-color);border-radius:var(--radius);padding:1rem;background:var(--bg-card);text-align:center;">
+                  <div style="font-weight:700;color:var(--warning);margin-bottom:0.5rem;">MODELO XST</div>
+                  <svg viewBox="0 0 200 90" width="100%" height="90" style="max-width:200px;margin:0 auto;display:block;">
+                    <rect x="10" y="10" width="180" height="70" rx="8" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+                    <rect x="25" y="35" width="150" height="20" rx="3" fill="#0f172a"/>
+                    <!-- Sin LED frontal -->
+                    <text x="100" y="25" fill="#64748b" font-size="9" font-family="sans-serif" text-anchor="middle">SIN LED FRONTAL</text>
+                  </svg>
+                  <p style="font-size:0.8rem;color:var(--text-muted);margin-top:0.4rem;">
+                    <strong>Frente liso sin luces LED</strong> en la ranura. Configurar como <code>XST</code> en el menú E-Box.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <!-- TARJETA BLOQUEADA / OCUPADA -->
+        <details class="tech-card" id="tarjetaOcupada">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              <span>Tarjeta de Cliente Bloqueada / Ocupada</span>
+            </div>
+            <span class="badge badge-warning">Atención a Cliente</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>Procedimiento cuando el sistema indica que la tarjeta de un cliente continúa en sesión activa:</p>
+            <ol class="step-list">
+              <li class="step-item">
+                <strong>Localizar la Terminal Previa:</strong> Ubicar en el sistema WIGOS o piso de sala cuál fue la última máquina jugada por el cliente.
+              </li>
+              <li class="step-item">
+                <strong>Verificar Giros / Jugadas Gratis (Free Games):</strong> Comprobar si quedaron partidas automáticas pendientes por reclamar; si es así, dejar que el ciclo termine.
+              </li>
+              <li class="step-item">
+                <strong>Desbloqueo de Jackpot / Llave Dorada:</strong>
+                Si la terminal pagó un premio mayor (Jackpot / Handpay) y la máquina se bloquea en espera de asistente, insertar y girar la <strong>llave dorada de reset</strong> (Attendant Key) para liberar el pago.
+              </li>
+              <li class="step-item">
+                <strong>Reinicio de Terminal:</strong> Si la tarjeta persiste tomada por el servidor, reiniciar la máquina de juego desde su switch principal.
+              </li>
+              <li class="step-item">
+                <strong>Pago Manual de Respaldo:</strong> Si tras los pasos anteriores la sesión no se cierra en base de datos, tramitar pago manual con supervisión de sala.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- TOPPER / TV-BOX -->
+        <details class="tech-card" id="toper">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+              <span>Topper (Pantalla Superior / TV-Box) Apagado o Congelado</span>
+            </div>
+            <span class="badge badge-info">Pantalla Superior</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <p>
+              El Topper muestra los progresivos, publicidad y animaciones de la terminal, operado habitualmente por un micro-ordenador o TV-Box dentro del mueble:
+            </p>
+            <ul class="step-list">
+              <li class="step-item">
+                <strong>Ubicación del TV-Box:</strong> Abrir el gabinete principal de la máquina; en la parte superior interna se encuentra instalado el reproductor multimedia.
+              </li>
+              <li class="step-item">
+                <strong>Secuencia de Desconexión:</strong> Desconectar primero la clavija de alimentación eléctrica y posteriormente el cable HDMI. <em>(Si no cuenta con TV-Box independiente, apagar la máquina durante 10 segundos)</em>.
+              </li>
+              <li class="step-item">
+                <strong>Reconexión Secuencial:</strong> Esperar 5 segundos. Conectar primero la alimentación eléctrica y seguidamente el cable de video HDMI.
+              </li>
+              <li class="step-item">
+                <strong>Control Remoto en Menú:</strong> Si el TV-Box arranca en la pantalla principal de Android o menú de opciones, utilizar el control remoto de soporte técnico para seleccionar la app de video/player correspondiente.
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <!-- SCANNERS -->
+        <details class="tech-card" id="scaner">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 7 23 1 17 1"></polyline><line x1="16" y1="8" x2="23" y2="1"></line><polyline points="1 17 1 23 7 23"></polyline><line x1="8" y1="16" x2="1" y2="23"></line></svg>
+              <span>Calibración de Scanners de Documentos</span>
+            </div>
+            <span class="badge badge-success">Utilidad Windows</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <div class="callout callout-tip">
+              <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div>
+                <strong>Atajo Rápido:</strong> Presionar la tecla <kbd>Windows</kbd> en el teclado USB. Si el menú desplegable de Windows aparece, saltar directamente al paso 4.
+              </div>
+            </div>
+
+            <ol class="step-list">
+              <li class="step-item">
+                Abrir el Administrador de Tareas presionando la combinación <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Esc</kbd>.
+              </li>
+              <li class="step-item">
+                Presionar la tecla <kbd>Alt</kbd> y luego <kbd>Enter</kbd> (o hacer clic en el menú <em>Archivo</em>).
+              </li>
+              <li class="step-item">
+                Seleccionar la opción <strong>"Nueva tarea"</strong>, escribir <code>explorer.exe</code> y presionar <kbd>Enter</kbd> para inicializar la barra de tareas y escritorio.
+              </li>
+              <li class="step-item">
+                Buscar y ejecutar el software <strong>"Calibration Wizard"</strong>. El asistente solicitará insertar la hoja de calibración oficial.
+              </li>
+              <li class="step-item">
+                Solicitar la hoja de calibración en bodega de refacciones. En situaciones de urgencia sin hoja oficial, se puede usar una hoja blanca bond limpia y sin dobleces.
+              </li>
+              <li class="step-item">
+                Insertar el papel en el scanner, hacer clic en <em>Siguiente</em> y presionar <strong>"Calibrar ahora"</strong> hasta recibir el aviso de éxito.
+              </li>
+            </ol>
+          </div>
+        </details>
+
+        <!-- AUDIO, BOTONERAS, IMPRESORAS -->
+        <details class="tech-card" id="perifericos-adicionales">
+          <summary class="tech-card-header">
+            <div class="summary-title-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+              <span>Audio, Video, Botoneras & Impresoras TITO</span>
+            </div>
+            <span class="badge badge-info">Periféricos Generales</span>
+            <svg class="chevron-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </summary>
+          <div class="tech-card-body">
+            <div class="tech-table-wrapper">
+              <table class="tech-table">
+                <thead>
+                  <tr>
+                    <th>Componente</th>
+                    <th>Síntoma Típico</th>
+                    <th>Protocolo de Corrección</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Audio & Amplificador</strong></td>
+                    <td>Sin sonido o distorsión severa</td>
+                    <td>Revisar conector minijack 3.5mm o salida HDMI; comprobar potenciómetro de volumen del gabinete y alimentación de 12V al amplificador.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Botonera (Deck Táctil / Mecánico)</strong></td>
+                    <td>Botón "Cobrar" o "Jugar" pegado</td>
+                    <td>Limpiar microswitch con alcohol isopropílico; verificar arnés de tierra (ground harness) y conexión USB/Serial de la placa I/O.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Impresora de Tickets (TITO)</strong></td>
+                    <td>Luz roja de papel o error de cabezal</td>
+                    <td>Comprobar sensor de papel abierto, reponer rollo térmico hacia el lado de impresión correcto y limpiar barra térmica con paño seco.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Monitores (Pantalla Principal)</strong></td>
+                    <td>Sin señal / Pantalla negra</td>
+                    <td>Verificar cable DisplayPort/DVI; probar fuente de poder conmutada de 12V/24V del monitor en el riel de energía.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </details>
+
+      </section>
+
+      <!-- SECCIÓN: MÁQUINAS Y PROVEEDORES -->
+      <section class="section-container" id="maquinas">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
+            Fabricantes de Máquinas de Juego
+          </h2>
+          <span class="badge badge-primary">Piso de Juego</span>
+        </div>
+
+        <div class="tech-table-wrapper">
+          <table class="tech-table">
+            <thead>
+              <tr>
+                <th>Fabricante</th>
+                <th>Modelos Comunes</th>
+                <th>Puntos Clave de Mantenimiento</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>ZITRO</strong></td>
+                <td>Altius Glare, Fusion, Link King</td>
+                <td>Revisar conexionado SAS hacia E-Box, validación de toppers dinámicos y sellos de seguridad de CPU.</td>
+              </tr>
+              <tr>
+                <td><strong>IGT</strong></td>
+                <td>CrystalDual 27, PeakSlant, AVP</td>
+                <td>Sensibilidad a fallos de batería de respaldo (RAM Clear solo con supervisión), verificar arnés COM SAS.</td>
+              </tr>
+              <tr>
+                <td><strong>AGS</strong></td>
+                <td>Orion Portrait, Curve, Slant</td>
+                <td>Revisión de cableado de botonera LED envolvente y calibración de panel táctil vertical.</td>
+              </tr>
+              <tr>
+                <td><strong>ORTIZ GAMING</strong></td>
+                <td>O-Circle, Standard Video Bingo</td>
+                <td>Monitoreo de lectores de código de barras y compatibilidad con tarjeteros Magtek/XST.</td>
+              </tr>
+              <tr>
+                <td><strong>EGT</strong></td>
+                <td>General Series, Premier Curved</td>
+                <td>Asegurar llaves de reset en jackpot y switch de puerta lógica de caja fuerte.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: ARCHIVOS Y FORMATOS TÉCNICOS -->
+      <section class="section-container" id="proveedores-archivos">
+        <div class="section-header">
+          <h2>
+            <svg class="section-header-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            Archivos Operativos & Contactos de Proveedores
+          </h2>
+          <span class="badge badge-success">Documentos Oficiales</span>
+        </div>
+
+        <p style="margin-bottom:1rem;color:var(--text-muted);font-size:0.9rem;">
+          Acceda directamente a los formatos de control técnico y al directorio oficial de escalamiento para soporte externo:
+        </p>
+
+        <!-- TARJETA DESCARGA 1: CONTACTOS -->
+        <a href="manual/archivos/contactos proveedores 2024.xlsx" download="contactos proveedores 2024.xlsx" class="download-card">
+          <div class="download-info">
+            <div class="download-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7.5" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            </div>
+            <div>
+              <div class="download-title">Directorio de Contactos de Proveedores 2024</div>
+              <div class="download-meta">Excel (.xlsx) • Teléfonos, correos y contactos de soporte técnico por marca</div>
+            </div>
+          </div>
+          <span class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Descargar</span>
+          </span>
+        </a>
+
+        <!-- TARJETA DESCARGA 2: FORMATO MASTER HOLOGRAMAS -->
+        <a href="manual/archivos/FORMATO MASTER ANDARES S50 HOLOGRAMAS.xlsx" download="FORMATO MASTER ANDARES S50 HOLOGRAMAS.xlsx" class="download-card">
+          <div class="download-info">
+            <div class="download-icon" style="background:rgba(56, 189, 248, 0.15);border-color:rgba(56, 189, 248, 0.3);color:var(--primary);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            </div>
+            <div>
+              <div class="download-title">Formato Master Andares S50 Hologramas</div>
+              <div class="download-meta">Excel (.xlsx) • Control de marchamos, hologramas y precintos de seguridad</div>
+            </div>
+          </div>
+          <span class="btn-icon">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Descargar</span>
+          </span>
+        </a>
+      </section>
+
+      <!-- BOTÓN VOLVER ARRIBA -->
+      <button class="btn-scroll-top" id="btnScrollTop" title="Volver al inicio" aria-label="Volver arriba">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"></polyline></svg>
+      </button>
+
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       SCRIPTS INTERACTIVOS EMBEBIDOS (MODO OSCURO, BUSCADOR, NAVEGACIÓN, SIMULADOR)
+       ========================================================================== -->
+  <script>
+    (function() {
+      // 1. Selector de Tema (Claro / Oscuro) con persistencia
+      const htmlEl = document.documentElement;
+      const themeBtn = document.getElementById('btnThemeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+
+      function setTheme(theme) {
+        htmlEl.setAttribute('data-theme', theme);
+        localStorage.setItem('manual_theme', theme);
+        if (theme === 'light') {
+          themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+        } else {
+          themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
+        }
+      }
+
+      const savedTheme = localStorage.getItem('manual_theme') || 'dark';
+      setTheme(savedTheme);
+
+      themeBtn.addEventListener('click', () => {
+        const current = htmlEl.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      // 2. Buscador en tiempo real de fallas y palabras clave
+      const searchInput = document.getElementById('searchInput');
+      const techCards = document.querySelectorAll('details.tech-card');
+
+      searchInput.addEventListener('input', function() {
+        const term = this.value.toLowerCase().trim();
+        techCards.forEach(card => {
+          const text = card.textContent.toLowerCase();
+          if (!term || text.includes(term)) {
+            card.style.display = '';
+            if (term.length > 2) {
+              card.setAttribute('open', '');
+            }
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+
+      // Atajo de teclado '/' para enfocar el buscador
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+        }
+      });
+
+      // 3. Desplegar / Colapsar Todas las Tarjetas
+      const toggleAllBtn = document.getElementById('btnToggleAll');
+      const toggleAllTxt = document.getElementById('txtToggleAll');
+      let allExpanded = false;
+
+      toggleAllBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        techCards.forEach(card => {
+          if (allExpanded) {
+            card.setAttribute('open', '');
+          } else {
+            card.removeAttribute('open');
+          }
+        });
+        toggleAllTxt.textContent = allExpanded ? 'Plegar' : 'Desplegar';
+      });
+
+      // 4. Imprimir / Exportar a PDF
+      document.getElementById('btnPrint').addEventListener('click', () => {
+        // Abrir todas las secciones antes de imprimir
+        techCards.forEach(card => card.setAttribute('open', ''));
+        window.print();
+      });
+
+      // 5. Menú Móvil / Sidebar Toggle
+      const sidebar = document.getElementById('sidebarNav');
+      const sidebarToggle = document.getElementById('btnSidebarToggle');
+
+      if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+          sidebar.classList.toggle('open');
+        });
+      }
+
+      // Cerrar sidebar al hacer click en un link en pantallas pequeñas
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth <= 992) {
+            sidebar.classList.remove('open');
+          }
+        });
+      });
+
+      // 6. Resaltar enlace activo del sidebar al scrollear
+      const sections = document.querySelectorAll('section[id], details[id]');
+      const navLinks = document.querySelectorAll('.sidebar-link');
+
+      window.addEventListener('scroll', () => {
+        let currentId = '';
+        const scrollPos = window.scrollY + 120;
+
+        sections.forEach(sec => {
+          if (sec.offsetTop <= scrollPos) {
+            currentId = sec.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('active');
+          }
+        });
+
+        // Botón volver arriba
+        const btnScroll = document.getElementById('btnScrollTop');
+        if (window.scrollY > 400) {
+          btnScroll.style.display = 'flex';
+        } else {
+          btnScroll.style.display = 'none';
+        }
+      });
+
+      document.getElementById('btnScrollTop').addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 7. Auto-expandir details al hacer clic en enlaces con ancla (hash)
+      function checkHashAndOpen() {
+        const hash = window.location.hash;
+        if (hash) {
+          const target = document.querySelector(hash);
+          if (target) {
+            if (target.tagName.toLowerCase() === 'details') {
+              target.setAttribute('open', '');
+            } else {
+              const parentDetails = target.closest('details');
+              if (parentDetails) parentDetails.setAttribute('open', '');
+            }
+          }
+        }
+      }
+      window.addEventListener('hashchange', checkHashAndOpen);
+      checkHashAndOpen();
+
+      // 8. Simulador Táctil Interactivo de Patrones E-Box
+      let touchCount = 0;
+      let lastTouchTime = 0;
+      let touchResetTimer = null;
+      const simStatus = document.getElementById('simStatus');
+      const simCounter = document.getElementById('simCounter');
+
+      window.simTouch = function(num) {
+        const now = Date.now();
+        clearTimeout(touchResetTimer);
+
+        if (lastTouchTime && (now - lastTouchTime > 1500)) {
+          touchCount = 0;
+        }
+        lastTouchTime = now;
+        touchCount++;
+
+        simCounter.textContent = 'Toques: ' + touchCount;
+
+        if (touchCount >= 6) {
+          simStatus.innerHTML = '<strong style="color:var(--success);">¡ÉXITO! Cadencia detectada. Acceso concedido al menú de servicio de E-Box.</strong>';
+          simCounter.style.color = 'var(--success)';
+        } else {
+          simStatus.innerHTML = 'Pulsando punto <strong>[' + num + ']</strong>. Continúe rítmicamente (' + (6 - touchCount) + ' más para activar)...';
+          simCounter.style.color = 'var(--primary)';
+        }
+
+        touchResetTimer = setTimeout(() => {
+          touchCount = 0;
+          simCounter.textContent = 'Toques: 0';
+          simStatus.textContent = 'Simulador táctil: Haga clic rápidamente en los números del diagrama.';
+          simCounter.style.color = 'var(--primary)';
+        }, 2500);
+      };
+
+    })();
+  </script>
+</body>
+</html>

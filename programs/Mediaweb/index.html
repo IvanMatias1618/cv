@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>✨ Mediaweb • Álbum de Memorias & Versos ✨</title>
+  <meta name="description" content="Un santuario digital interactivo de memorias, versos líricos, momentos fotográficos y paisajes sonoros.">
+  
+  <link rel="stylesheet" href="estilos.css">
+  <script src="scripts/inicio.js" defer></script>
+</head>
+
+<body>
+  <!-- HEADER & NAVEGACIÓN -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#inicio" class="brand" data-target="inicio">
+        <div class="brand-icon">✨</div>
+        <div class="brand-info">
+          <span class="brand-title">MEDIAWEB</span>
+          <span class="brand-subtitle">Memorias & Versos</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><button class="nav-link active" data-target="inicio">🏠 Inicio</button></li>
+          <li><button class="nav-link" data-target="momentos">📸 Galería</button></li>
+          <li><button class="nav-link" data-target="poemas">📖 Lecturas</button></li>
+          <li><button class="nav-link" data-target="musica">🎵 Sonidos</button></li>
+          <li><button class="nav-link" data-target="dedicatoria">💌 Carta</button></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="action-btn" id="theme-toggle" title="Cambiar tema (Amanecer / Anochecer)" aria-label="Cambiar tema">☀️</button>
+        <button class="action-btn menu-toggle" id="menu-toggle" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-wrapper">
+
+    <!-- SECCIÓN: INICIO / PORTADA -->
+    <section id="inicio" class="view-section active">
+      <div class="hero-section">
+        <div class="hero-badge">🌼 Álbum Personal • Memoria Digital 🌼</div>
+        <h1 class="hero-title">Un santuario de luz, <span>instantes</span> y palabras.</h1>
+        <p class="hero-description">
+          Quería decirte que siempre estarás en mi memoria. 
+          Aquí guardo un pedazo de ese tiempo: instantes compartidos, versos nacidos de tu inspiración y un refugio para volver cuando quieras sonreír.
+        </p>
+
+        <div class="hero-quote">
+          “Dado que iluminas cualquier lugar: quiero que ilumines mi alma, por eso te guardo ahí.”
+        </div>
+
+        <div class="hero-shortcuts">
+          <button class="shortcut-pill" data-target="momentos">📸 Ver Álbum Fotográfico</button>
+          <button class="shortcut-pill" data-target="poemas">📖 Leer Poemas & Versos</button>
+          <button class="shortcut-pill" data-target="musica">🎵 Escuchar Ambiente Sonoro</button>
+          <button class="shortcut-pill" data-target="dedicatoria">💌 Leer la Dedicatoria</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: GALERÍA DE MOMENTOS Y GLITCH -->
+    <section id="momentos" class="view-section">
+      <div class="section-header">
+        <div class="section-heading-group">
+          <span class="section-kicker">Colección Fotográfica</span>
+          <h2 class="section-title">Momentos & Fragmentos</h2>
+          <p class="section-subtitle">Haz clic en cualquier imagen para verla en alta resolución con el visor inmersivo.</p>
+        </div>
+
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="todos">Todos (28)</button>
+          <button class="filter-btn" data-filter="reloj">🕰️ Reloj de Vida (17)</button>
+          <button class="filter-btn" data-filter="glitch">🔮 Glitch & Magia (11)</button>
+        </div>
+      </div>
+
+      <ul id="galeria" class="gallery-grid">
+        <!-- Renderizado dinámicamente con inicio.js -->
+      </ul>
+    </section>
+
+    <!-- SECCIÓN: LECTURAS Y POEMAS -->
+    <section id="poemas" class="view-section">
+      <div class="section-header">
+        <div class="section-heading-group">
+          <span class="section-kicker">Antología Lírica</span>
+          <h2 class="section-title">Poemas & Escritos</h2>
+          <p class="section-subtitle">Letras dedicadas a la ternura, el crecimiento, el amanecer y las despedidas.</p>
+        </div>
+      </div>
+
+      <div class="poetry-container">
+        <!-- Barra lateral de poemas -->
+        <aside class="poetry-sidebar">
+          <div class="poetry-nav-title">Índice de Obras</div>
+          <ul class="poetry-nav-list">
+            <li><button class="poetry-btn active" data-poem="poem-kitty">🐾 Go Kitty!</button></li>
+            <li><button class="poetry-btn" data-poem="poem-amanece">🌅 Amanece</button></li>
+            <li><button class="poetry-btn" data-poem="poem-anochece">🌙 Anochece</button></li>
+            <li><button class="poetry-btn" data-poem="poem-porque">✨ La Razón de Escribir</button></li>
+          </ul>
+        </aside>
+
+        <!-- Contenedor del poema seleccionado -->
+        <div class="poetry-display">
+          
+          <!-- POEMA: GO KITTY -->
+          <article id="poem-kitty" class="poem-article active">
+            <header class="poem-header">
+              <span class="poem-kicker">Canto de Ánimo & Aventura</span>
+              <h2 class="poem-title">Go Kitty!</h2>
+              <p class="poem-subtitle">“Ve y maúlla, a la tierra haz girar”</p>
+            </header>
+
+            <div class="poem-body">
+              <div class="poem-stanza">
+                Go go go go, Kitty<br>
+                Tu corazón, luz del abismo.<br>
+                Brillas por doquier.
+              </div>
+
+              <div class="poem-stanza">
+                Ve y maúlla, a la tierra haz girar<br>
+                Marcha, duda y ve.
+              </div>
+
+              <div class="poem-stanza">
+                Ya sabrás.<br>
+                Sabrás hacer lo que quieras,<br>
+                puedes probar.
+              </div>
+
+              <div class="poem-bridge">
+                Ve, haznos marchar.<br>
+                Con tu ritmo al explorar.<br>
+                Contagias vida con tu mirar.
+              </div>
+
+              <div class="poem-stanza">
+                Puedes ronronear,<br>
+                que los astros escucharán.<br>
+                No hay lugar que no puedas explorar,<br>
+                puedes olfatear.
+              </div>
+
+              <div class="poem-stanza">
+                Ve, haz tu propio hogar:<br>
+                Teje una manta,<br>
+                Ata nubes al lugar,<br>
+                Siembra un jardín y descansa.
+              </div>
+            </div>
+          </article>
+
+          <!-- POEMA: AMANECE -->
+          <article id="poem-amanece" class="poem-article">
+            <header class="poem-header">
+              <span class="poem-kicker">Ciclo del Alba</span>
+              <h2 class="poem-title">Amanece</h2>
+              <p class="poem-subtitle">“Aún hay tanto que hacer, caminos por recorrer”</p>
+            </header>
+
+            <div class="poem-body">
+              <div class="poem-stanza">
+                Dónde sea que estés:<br>
+                Nubes sostienen tus pies.<br>
+                Flores te miran crecer.<br>
+                Y entre soles y lunas duermes.
+              </div>
+
+              <div class="poem-stanza">
+                Sonríe:<br>
+                Aún hay tanto que hacer.<br>
+                Caminos por recorrer.<br>
+                Y jardines a ver.
+              </div>
+
+              <div class="poem-bridge">
+                Un cascarón que ya quieres romper.
+              </div>
+
+              <div class="poem-stanza">
+                Atrévete:<br>
+                Alza el pecho.<br>
+                Deshaz el cielo en tu voz.
+              </div>
+
+              <div class="poem-stanza">
+                Anímate:<br>
+                Rompe el techo.<br>
+                Vuela en tu habitación.
+              </div>
+
+              <div class="poem-stanza">
+                Y dime:<br>
+                Dónde sea que sueñes,<br>
+                ¿Viste el amanecer...<br>
+                ...en ti, en tu ser?
+              </div>
+
+              <div class="poem-stanza">
+                Alza tus pies y ve.<br>
+                Abre los ojos y ve:<br>
+                Brilla tu ser.
+              </div>
+
+              <div class="poem-stanza">
+                Y dónde sea que esté:<br>
+                Sabes que cerca estaré.<br>
+                Veré tu amanecer.
+              </div>
+
+              <div class="poem-bridge">
+                Y vendrá el anochecer;<br>
+                Pero volverás a ser:<br>
+                <strong>Un sol en flor.</strong>
+              </div>
+            </div>
+          </article>
+
+          <!-- POEMA: ANOCHECE -->
+          <article id="poem-anochece" class="poem-article">
+            <header class="poem-header">
+              <span class="poem-kicker">Crepúsculo & Sosiego</span>
+              <h2 class="poem-title">Anochece</h2>
+              <p class="poem-subtitle">“Que el temor sea ave, y juntos vuelen suave”</p>
+            </header>
+
+            <div class="poem-body">
+              <div class="poem-stanza">
+                Duerme el sol.<br>
+                Cual breve grito.<br>
+                Capullo en miedo.<br>
+                Abrir el cascarón.
+              </div>
+
+              <div class="poem-bridge">
+                Corres, subes al árbol.<br>
+                ¿Volarás con valor?
+              </div>
+
+              <div class="poem-stanza">
+                Duerme:<br>
+                El aire sabe tu nombre.<br>
+                Aún lo retienen tus dientes<br>
+                como dudas en mente libre.
+              </div>
+
+              <div class="poem-bridge">
+                Corres, subes al árbol descalza,<br>
+                te abrazarán cual cuna sus ramas.
+              </div>
+
+              <div class="poem-stanza">
+                Déjalo ser:<br>
+                Que el temor sea ave.<br>
+                Y juntos vuelen suave:<br>
+                A un lugar que no acabe.
+              </div>
+
+              <div class="poem-stanza">
+                Y ríes —bajo la lluvia.<br>
+                Y sientes —Y vives (En esencia).<br>
+                Te levantes una vez más,<br>
+                sobas tus heridas y vas.
+              </div>
+
+              <div class="poem-bridge">
+                Amanecerás.
+              </div>
+
+              <div class="poem-stanza">
+                Y te caes otra vez,<br>
+                otra vez y otra vez,<br>
+                pero vuelves a ser<br>
+                Un sol en flor. —ve.
+              </div>
+
+              <div class="poem-bridge">
+                Dios en flor.<br>
+                <small style="display:block; margin-top:0.5rem; font-size:1.1rem; opacity:0.85;">Déjalo ser: que el temblor sea ave.</small>
+              </div>
+            </div>
+          </article>
+
+          <!-- EL PORQUÉ -->
+          <article id="poem-porque" class="poem-article">
+            <header class="poem-header">
+              <span class="poem-kicker">Reflexión Íntima</span>
+              <h2 class="poem-title">La Razón de Escribir</h2>
+              <p class="poem-subtitle">De dónde brotan estas palabras</p>
+            </header>
+
+            <div class="poem-body" style="text-align: center; font-size: 1.55rem; padding: 2rem 0;">
+              <p style="font-style: italic; color: var(--accent); line-height: 2;">
+                “Quería escribir algo para mí,<br>
+                pero no podía evitar inspirarme en tu luz.”
+              </p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: MÚSICA & PAISAJE SONORO -->
+    <section id="musica" class="view-section">
+      <div class="section-header">
+        <div class="section-heading-group">
+          <span class="section-kicker">Atmósfera Acústica</span>
+          <h2 class="section-title">Música & Paisaje Sonoro</h2>
+          <p class="section-subtitle">Activa el generador armónico para acompañar tu lectura o carga una canción personal en MP3.</p>
+        </div>
+      </div>
+
+      <div class="soundscape-container">
+        <!-- Generador Armónico Web Audio API -->
+        <div class="sound-card">
+          <div class="sound-header">
+            <div class="sound-icon">🎐</div>
+            <div class="sound-info">
+              <h3>Ambiente Sintetizado</h3>
+              <p>Funciona en cualquier dispositivo sin descargas</p>
+            </div>
+          </div>
+
+          <div class="sound-presets">
+            <button class="preset-btn active" data-preset="campanas">🎐 Campanas Etéreas</button>
+            <button class="preset-btn" data-preset="lluvia">🌧️ Lluvia Suave</button>
+            <button class="preset-btn" data-preset="crepusculo">🌌 Crepúsculo Cálido</button>
+          </div>
+
+          <!-- Visualizador -->
+          <div class="visualizer-bars" id="sound-visualizer">
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+            <div class="v-bar"></div>
+          </div>
+
+          <!-- Controles principales -->
+          <div class="sound-controls">
+            <button class="play-main-btn" id="play-audio-btn" title="Reproducir / Pausar Ambiente">▶</button>
+            <div class="volume-slider-group">
+              <span style="font-size: 0.85rem;">Volumen:</span>
+              <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="0.35">
+            </div>
+          </div>
+        </div>
+
+        <!-- Carga de Música Propia -->
+        <div class="sound-card">
+          <div class="sound-header">
+            <div class="sound-icon">🎵</div>
+            <div class="sound-info">
+              <h3>Tu Propia Pista de Audio</h3>
+              <p>Carga un archivo MP3, WAV o M4A para sonar de fondo</p>
+            </div>
+          </div>
+
+          <label class="file-upload-box">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">📂</div>
+            <strong>Seleccionar archivo de audio</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">(Tu audio se reproducirá solo localmente en tu navegador)</p>
+            <input type="file" id="audio-file-input" accept="audio/*">
+          </label>
+
+          <p id="custom-audio-status" style="font-size: 0.85rem; color: var(--accent); font-weight: 500;"></p>
+          <audio id="custom-audio-player" controls style="width: 100%; display: none; margin-top: 0.5rem;"></audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN: DEDICATORIA / CARTA -->
+    <section id="dedicatoria" class="view-section">
+      <div class="section-header">
+        <div class="section-heading-group">
+          <span class="section-kicker">Palabras del Alma</span>
+          <h2 class="section-title">Dedicatoria Íntima</h2>
+          <p class="section-subtitle">Las notas y sentimientos que originaron este proyecto.</p>
+        </div>
+      </div>
+
+      <div class="letter-card">
+        <div class="letter-content">
+          <p>
+            Hola... si lees esto: pues es la forma más directa que tengo de escribir.
+          </p>
+          <p>
+            Me salieron muchas lágrimas dulces... y agridulces al hacer esto. Pero quería hacerlo.
+          </p>
+          <p>
+            Me da mucha tristeza que te vayas... espero no de mi vida jeje :’3 <em>(bendita tecnología)</em>.
+          </p>
+          <p>
+            ...Y no sé, en lo personal no quería que supieras cuánto significas para mí. Así es, significas porque siempre que te decía que me inspiraba tu ser, ha sido lo más literal.
+          </p>
+          <p>
+            Y quería darte esta parte de mí, es la forma más cercana al verbo de entregar. Entregarte esta memoria mía.
+          </p>
+          <p>
+            Porque siempre amé tu energía, robé de ti tus gestos, tus risas, la pasión que le pones a lo que haces... a dejar soltar la ternura, y a expresarme más.
+          </p>
+
+          <div class="letter-highlight">
+            “Dado que iluminas cualquier lugar: quiero que ilumines mi alma, por eso te guardo ahí.”
+          </div>
+
+          <p>
+            Quería hacer algo para decirte todo esto, y que donde sea que camines, recuerdes el sol que eres.
+          </p>
+
+          <div class="letter-signature">
+            Con todo mi cariño ✨
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- LIGHTBOX MODAL (VISOR A PANTALLA COMPLETA) -->
+  <div class="lightbox-modal" id="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-container">
+      <button class="lightbox-close" id="lightbox-close" title="Cerrar (Esc)">✕</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" title="Anterior (Flecha Izquierda)">❮</button>
+      <img src="" alt="" class="lightbox-image" id="lightbox-img">
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" title="Siguiente (Flecha Derecha)">❯</button>
+      <div class="lightbox-caption">
+        <h4 class="lightbox-title" id="lightbox-title">Título</h4>
+        <span class="lightbox-counter" id="lightbox-counter">1 de 28</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-quote">
+        “Nubes sostienen tus pies, flores te miran crecer.”
+      </div>
+      <div class="footer-copy">
+        Mediaweb • Proyecto de Álbum & Memoria Digital
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

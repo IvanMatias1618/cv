@@ -623,6 +623,257 @@
   background: #fff;
 }
 
+/* Showcase de Proyectos Full-Stack (Inventario y Marketplace) */
+.project-showcase {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px;
+  background: #0d121f;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.project-showcase-hero {
+  background: rgba(30, 41, 59, 0.55);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+}
+
+.project-showcase-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.project-showcase-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+}
+
+.project-tech-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.tech-pill {
+  font-size: 11px;
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  font-family: var(--font-mono);
+}
+
+.tech-pill.rust {
+  background: rgba(249, 115, 22, 0.15);
+  color: var(--accent-rust);
+  border-color: rgba(249, 115, 22, 0.4);
+}
+
+.tech-pill.green {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.project-repos-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.project-section-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Video Player */
+.project-video-card {
+  background: #090d16;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.project-video-wrapper {
+  position: relative;
+  width: 100%;
+  background: #000;
+}
+
+.project-video {
+  width: 100%;
+  max-height: 400px;
+  display: block;
+  object-fit: contain;
+}
+
+.project-video-meta {
+  padding: 10px 16px;
+  background: rgba(18, 24, 38, 0.95);
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Galería de imágenes */
+.project-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.project-gallery-card {
+  background: rgba(18, 24, 38, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-gallery-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.project-gallery-img-box {
+  width: 100%;
+  height: 150px;
+  background: #090d16;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-gallery-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.project-gallery-card:hover .project-gallery-img-box img {
+  transform: scale(1.05);
+}
+
+.project-gallery-caption {
+  padding: 9px 12px;
+  font-size: 11.5px;
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.project-gallery-caption strong {
+  color: #fff;
+  font-size: 12px;
+}
+
+.project-gallery-caption span {
+  color: var(--text-muted);
+  font-size: 10.5px;
+}
+
+/* Lightbox Modal */
+.image-lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.image-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.lightbox-content img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+}
+
+.lightbox-caption {
+  margin-top: 10px;
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -38px;
+  right: 0;
+  background: rgba(239, 68, 68, 0.85);
+  color: #fff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
 /* ==============================================================================
    APP 4: Bloc de Notas (notepad-app)
    ============================================================================== */
@@ -718,48 +969,270 @@
    ============================================================================== */
 .sysfiles-app {
   display: flex;
-  flex-direction: column;
   height: 100%;
-  padding: 20px;
   color: var(--text);
+  font-family: var(--font-mono);
+  overflow: hidden;
+}
+
+.sysfiles-sidebar {
+  width: 230px;
+  background: rgba(18, 24, 38, 0.95);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sysfiles-sidebar-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sysfiles-tree {
+  list-style: none;
+  overflow-y: auto;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sysfiles-folder-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  padding: 4px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sysfiles-folder-files {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 10px;
+}
+
+.sysfiles-file-item {
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 11.5px;
+  color: #cbd5e1;
+  cursor: pointer;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.12s ease;
+}
+
+.sysfiles-file-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sysfiles-file-item.active {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.sysfiles-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #0a0e17;
+  overflow: hidden;
+}
+
+.sysfiles-toolbar {
+  padding: 8px 14px;
+  background: rgba(20, 27, 43, 0.95);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sysfiles-file-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+}
+
+.sysfiles-badge-type {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+.sysfiles-code-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  background: #090d16;
+  position: relative;
+}
+
+.sysfiles-code-pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.sysfiles-terminal-box {
+  background: #05070c;
+  border-top: 1px solid var(--border);
+  padding: 12px 16px;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #86efac;
+}
+
+.sysfiles-term-header {
+  color: #94a3b8;
+  font-size: 10.5px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ==============================================================================
+   APP 6: Centro de Juegos Arcade (games-app)
+   ============================================================================== */
+.games-app {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.games-sidebar {
+  width: 220px;
+  background: rgba(18, 24, 38, 0.95);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.games-sidebar-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #c084fc;
+}
+
+.games-list {
+  list-style: none;
+  overflow-y: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.game-nav-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.12s ease;
+}
+
+.game-nav-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.game-nav-item.active {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: #8b5cf6;
+}
+
+.game-nav-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.game-nav-tag {
+  font-size: 10.5px;
+  color: var(--text-muted);
+}
+
+.games-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #0b0e17;
+}
+
+.game-toolbar {
+  background: rgba(20, 27, 43, 0.95);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.game-meta-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+
+.game-status-tag {
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(139, 92, 246, 0.2);
+  color: #c084fc;
+  border: 1px solid #8b5cf6;
   font-family: var(--font-mono);
 }
 
-.sysfiles-header {
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 14px;
-  margin-bottom: 16px;
-}
-
-.sysfiles-header h3 {
-  font-size: 14px;
-  color: #60a5fa;
-  margin-bottom: 6px;
-}
-
-.sysfiles-header p {
-  font-size: 12px;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
-
-.sysfiles-browser {
-  background: #0b0f19;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 16px;
+.game-frame-container {
   flex: 1;
-  overflow-y: auto;
+  position: relative;
+  background: #000;
 }
 
-.sysfiles-path {
-  font-size: 12px;
-  color: var(--accent-green);
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed var(--border);
+.game-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #1a1a1a;
 }
 
 /* Adaptabilidad para móviles y pantallas reducidas */
@@ -1097,30 +1570,112 @@
      APP 5: Explorador sys-files/
      -------------------------------------------------------------------------- */
   .sysfiles-app {
-    padding: 12px;
+    flex-direction: column;
   }
 
-  .sysfiles-header {
-    padding: 10px;
-    margin-bottom: 12px;
+  .sysfiles-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
   }
 
-  .sysfiles-header h3 {
-    font-size: 13px;
+  .sysfiles-sidebar-header {
+    display: none;
   }
 
-  .sysfiles-header p {
-    font-size: 11.5px;
-    line-height: 1.45;
+  .sysfiles-tree {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px 8px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .sysfiles-browser {
-    padding: 10px 12px;
+  .sysfiles-tree::-webkit-scrollbar {
+    display: none;
   }
 
-  .sysfiles-path {
+  .sysfiles-folder-title {
+    display: none;
+  }
+
+  .sysfiles-folder-files {
+    flex-direction: row;
+    padding-left: 0;
+    gap: 4px;
+  }
+
+  .sysfiles-file-item {
+    white-space: nowrap;
+    padding: 5px 10px;
     font-size: 11px;
-    word-break: break-all;
-    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  .sysfiles-toolbar {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .sysfiles-code-container {
+    padding: 10px;
+  }
+
+  /* --------------------------------------------------------------------------
+     APP 6: Centro de Juegos Arcade
+     -------------------------------------------------------------------------- */
+  .games-app {
+    flex-direction: column;
+  }
+
+  .games-sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .games-sidebar-header {
+    display: none;
+  }
+
+  .games-list {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 6px 8px;
+    gap: 6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .games-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .game-nav-item {
+    flex-shrink: 0;
+    padding: 6px 12px;
+  }
+
+  .game-nav-name {
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .game-nav-tag {
+    display: none;
+  }
+
+  .game-toolbar {
+    padding: 6px 10px;
+  }
+
+  .game-toolbar .btn-cv-action {
+    padding: 4px 8px;
+    font-size: 11px;
   }
 }
